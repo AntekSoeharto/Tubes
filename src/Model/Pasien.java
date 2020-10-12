@@ -11,18 +11,16 @@ import java.util.ArrayList;
  *
  * @author hp
  */
-public class Pasien extends User{
+public class Pasien extends User implements InterfaceGolongan{
     private ArrayList<RiwayatPasien> listRiwayatPasien = new ArrayList<RiwayatPasien>();
-    private boolean BPJS;
     
     public Pasien(){
         
     }
 
-    public Pasien(ArrayList<RiwayatPasien> listRiwayatPasien, boolean BPJS, String Nama, String NIK, String Alamat, String Telepon, int Umur) {
+    public Pasien(ArrayList<RiwayatPasien> listRiwayatPasien, String Nama, String NIK, String Alamat, String Telepon, int Umur) {
         super(Nama, NIK, Alamat, Telepon, Umur);
         this.listRiwayatPasien = listRiwayatPasien;
-        this.BPJS = BPJS;
     }
 
     public ArrayList<RiwayatPasien> getListRiwayatPasien() {
@@ -31,14 +29,6 @@ public class Pasien extends User{
 
     public void setListRiwayatPasien(ArrayList<RiwayatPasien> listRiwayatPasien) {
         this.listRiwayatPasien = listRiwayatPasien;
-    }
-
-    public boolean isBPJS() {
-        return BPJS;
-    }
-
-    public void setBPJS(boolean BPJS) {
-        this.BPJS = BPJS;
     }
 
     @Override
