@@ -5,36 +5,54 @@
  */
 package Model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
  * @author hp
  */
 public class RiwayatPasien extends Riwayat{
-    private String NamaDokter;
-    
-    
-    public RiwayatPasien(){
-        
+    private String penyakit;
+    private List<String> resepObat = new ArrayList<String>();
+    private Date tanggalKunjungan;
+
+    public RiwayatPasien() {
     }
 
-    public RiwayatPasien(String NamaDokter, Date Tanggal, String Keluhan, String Solusi) {
+    public RiwayatPasien(Date Tanggal, String Keluhan, String Solusi) {
         super(Tanggal, Keluhan, Solusi);
-        this.NamaDokter = NamaDokter;
     }
 
-    public String getNamaDokter() {
-        return NamaDokter;
+    public String getPenyakit() {
+        return penyakit;
     }
 
-    public void setNamaDokter(String NamaDokter) {
-        this.NamaDokter = NamaDokter;
+    public void setPenyakit(String penyakit) {
+        this.penyakit = penyakit;
+    }
+
+    public List<String> getResepObat() {
+        return resepObat;
+    }
+
+    public void setResepObat(List<String> resepObat) {
+        this.resepObat = resepObat;
+    }
+
+    public Date getTanggalKunjungan() {
+        return tanggalKunjungan;
+    }
+
+    public void setTanggalKunjungan(Date tanggalKunjungan) {
+        this.tanggalKunjungan = tanggalKunjungan;
     }
 
     @Override
     public String toString() {
-        return super.toString() + "   RiwayatPasien{" + "NamaDokter=" + NamaDokter + '}';
-    } 
+        return super.toString() + "RiwayatPasien{" + "penyakit=" + penyakit + ", resepObat=" + resepObat + ", tanggalKunjungan=" + tanggalKunjungan + '}';
+    }
+    
     
 }
