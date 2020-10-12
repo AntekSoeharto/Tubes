@@ -35,9 +35,6 @@ public class RiwayatPasien extends Riwayat{
     @Override
     public String toString() {
         return super.toString() + "   RiwayatPasien{" + "NamaDokter=" + NamaDokter + '}';
-    }
-
-   
-    
+    } 
     
 }
