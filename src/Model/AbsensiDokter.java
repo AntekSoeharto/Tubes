@@ -12,8 +12,9 @@ import java.util.Date;
  * @author hp
  */
 public class AbsensiDokter implements InterfaceAbsensiDokter{
-    private Date tanggal;
     private int Status;
+    private Date tanggal;
+    
     
     public AbsensiDokter(){
         

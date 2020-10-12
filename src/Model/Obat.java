@@ -12,8 +12,9 @@ package Model;
 public class Obat {
     private String Nama;
     private int hargaBeli;
-    private int hargaJual;
     private int Stok;
+    private int hargaJual;
+    
     
     public Obat(){
         
