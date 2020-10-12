@@ -11,7 +11,7 @@ package Model;
  */
 public class NewClass {
     public void printtest(){
-        System.out.println();
+        System.out.println("hello");
     }
     
 }
