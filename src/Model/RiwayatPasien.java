@@ -38,6 +38,7 @@ public class RiwayatPasien extends Riwayat{
     }
 
     public void setResepObat(List<String> resepObat) {
+
         this.resepObat = resepObat;
     }
 
@@ -51,8 +52,9 @@ public class RiwayatPasien extends Riwayat{
 
     @Override
     public String toString() {
-        return super.toString() + "RiwayatPasien{" + "penyakit=" + penyakit + ", resepObat=" + resepObat + ", tanggalKunjungan=" + tanggalKunjungan + '}';
+        return "RiwayatPasien{" + "Penyakit=" + penyakit + ", resepObat=" + resepObat + ", tanggalKunjungan=" + tanggalKunjungan + '}';
     }
-    
+
+
     
 }

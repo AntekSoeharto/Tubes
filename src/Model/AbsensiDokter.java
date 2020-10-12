@@ -14,6 +14,8 @@ import java.util.Date;
 public class AbsensiDokter implements InterfaceAbsensiDokter{
     private Date tanggal;
     private StatusAbsensi Status;
+
+    
     
     public AbsensiDokter(){
         
