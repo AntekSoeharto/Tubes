@@ -12,15 +12,16 @@ import java.util.Date;
  * @author hp
  */
 public class AbsensiDokter implements InterfaceAbsensiDokter{
-    private int Status;
     private Date tanggal;
+    private StatusAbsensi Status;
+
     
     
     public AbsensiDokter(){
         
     }
 
-    public AbsensiDokter(Date tanggal, int Status) {
+    public AbsensiDokter(Date tanggal, StatusAbsensi Status) {
         this.tanggal = tanggal;
         this.Status = Status;
     }
@@ -33,11 +34,11 @@ public class AbsensiDokter implements InterfaceAbsensiDokter{
         this.tanggal = tanggal;
     }
 
-    public int getStatus() {
+    public StatusAbsensi getStatus() {
         return Status;
     }
 
-    public void setStatus(int Status) {
+    public void setStatus(StatusAbsensi Status) {
         this.Status = Status;
     }
 
