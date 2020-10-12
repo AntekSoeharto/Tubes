@@ -13,15 +13,18 @@ import java.util.ArrayList;
  */
 public class Pasien extends User{
     private ArrayList<RiwayatPasien> listRiwayatPasien = new ArrayList<RiwayatPasien>();
-    private boolean BPJS;
+    private GolonganPasien BPJS;
     
     public Pasien(){
         
     }
 
-    public Pasien(ArrayList<RiwayatPasien> listRiwayatPasien, boolean BPJS, String Nama, String NIK, String Alamat, String Telepon, int Umur) {
+    public Pasien(GolonganPasien BPJS) {
+        this.BPJS = BPJS;
+    }
+
+    public Pasien(GolonganPasien BPJS, String Nama, String NIK, String Alamat, String Telepon, int Umur) {
         super(Nama, NIK, Alamat, Telepon, Umur);
-        this.listRiwayatPasien = listRiwayatPasien;
         this.BPJS = BPJS;
     }
 
@@ -33,18 +36,20 @@ public class Pasien extends User{
         this.listRiwayatPasien = listRiwayatPasien;
     }
 
-    public boolean isBPJS() {
+    public GolonganPasien getBPJS() {
         return BPJS;
     }
 
-    public void setBPJS(boolean BPJS) {
+    public void setBPJS(GolonganPasien BPJS) {
         this.BPJS = BPJS;
     }
 
     @Override
     public String toString() {
-        return super.toString() + "   Pasien{" + "listRiwayatPasien=" + listRiwayatPasien + ", BPJS=" + BPJS + '}';
+        return "Pasien{" + "listRiwayatPasien=" + listRiwayatPasien + ", BPJS=" + BPJS + '}';
     }
+
+    
     
     
 }
