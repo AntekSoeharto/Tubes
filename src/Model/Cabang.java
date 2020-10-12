@@ -28,8 +28,9 @@ public class Cabang{
         this.listobat = listobat;
         this.listDokter = listDokter;
         this.Alamat = Alamat;
-        this.Telepon = Telepon;
         this.Nama = Nama;
+        this.Telepon = Telepon;
+        
     }
 
     public String getAlamat() {
