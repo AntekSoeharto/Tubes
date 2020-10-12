@@ -10,14 +10,18 @@ public class Dokter extends User{
     private String NID;
     private String Poliklinik;
     private ArrayList<AbsensiDokter> Absen = new ArrayList<AbsensiDokter>();
-    private Double Gaji;
+    private ArrayList<String> listPendidikan = new ArrayList<String>();
+    private ArrayList<String> listKarir = new ArrayList<String>();
+    private double Gaji;
     
     public Dokter(){   
         
     }
     
-    public Dokter(ArrayList<AbsensiDokter> Absen, Double Gaji, String NID, String Poliklinik, String Nama, String NIK, String Alamat, String Telepon, int Umur) {
+    public Dokter(ArrayList<AbsensiDokter> Absen, ArrayList<String> listPendidikan, ArrayList<String> listKarir, double Gaji, String NID, String Poliklinik, String Nama, String NIK, String Alamat, String Telepon, int Umur) {
         super(Nama, NIK, Alamat, Telepon, Umur);
+        this.listKarir = listKarir;
+        this.listPendidikan = listPendidikan;
         this.Absen = Absen;
         this.Gaji = Gaji;
         this.NID = NID;
