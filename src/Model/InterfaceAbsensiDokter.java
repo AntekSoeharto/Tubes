@@ -10,7 +10,6 @@ package Model;
  * @author hp
  */
 public interface InterfaceAbsensiDokter {
-    
     int ALPHA = 0;
     int IZIN = 1;
     int MASUK = 2;
