@@ -10,6 +10,7 @@ package Model;
  * @author hp
  */
 public interface InterfaceGolongan {
+    
     int BPJS = 1;
     int NON_BPJS = 0;
 }
