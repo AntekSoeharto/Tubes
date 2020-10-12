@@ -11,7 +11,9 @@ package Model;
  */
 public class NewClass {
     public void printtest(){
-        System.out.print("hello");
+        int x = 2;
+        int y = 3;
+        System.out.println("Model.NewClass.printtest() = " + x*y);
     }
     
 }
