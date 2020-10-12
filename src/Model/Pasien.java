@@ -13,10 +13,26 @@ import java.util.ArrayList;
  */
 public class Pasien extends User implements InterfaceGolongan{
     private ArrayList<RiwayatPasien> listRiwayatPasien = new ArrayList<RiwayatPasien>();
+
+
+    private GolonganPasien BPJS;
+
     
     public Pasien(){
         
     }
+
+
+
+    public Pasien(GolonganPasien BPJS) {
+        this.BPJS = BPJS;
+    }
+
+    public Pasien(GolonganPasien BPJS, String Nama, String NIK, String Alamat, String Telepon, int Umur) {
+        super(Nama, NIK, Alamat, Telepon, Umur);
+        this.BPJS = BPJS;
+    }
+
 
     public ArrayList<RiwayatPasien> getListRiwayatPasien() {
         return listRiwayatPasien;
@@ -27,16 +43,27 @@ public class Pasien extends User implements InterfaceGolongan{
         this.listRiwayatPasien = listRiwayatPasien;
     }
 
+
     
 
     public void setListRiwayatPasien(ArrayList<RiwayatPasien> listRiwayatPasien) {
         this.listRiwayatPasien = listRiwayatPasien;
     }
+    public GolonganPasien getBPJS() {
+        return BPJS;
+    }
+
+    public void setBPJS(GolonganPasien BPJS) {
+        this.BPJS = BPJS;
+
+    }
 
     @Override
     public String toString() {
-        return super.toString() + "   Pasien{" + "listRiwayatPasien=" + listRiwayatPasien + ", BPJS=" + BPJS + '}';
+        return "Pasien{" + "listRiwayatPasien=" + listRiwayatPasien + ", BPJS=" + BPJS + '}';
     }
+
+    
     
     
 }
