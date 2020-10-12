@@ -18,8 +18,9 @@ public class Transaksi implements InterfaceGolongan{
     private int jumlah;
     private int JenisPasien;
     private double hargaKonsultasi;
-    private double hargaObat;
     private double total;
+    private double hargaObat;
+    
     
     public Transaksi(){
         
