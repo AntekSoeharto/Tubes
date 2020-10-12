@@ -18,14 +18,16 @@ public class Pasien extends User implements InterfaceGolongan{
         
     }
 
+    public ArrayList<RiwayatPasien> getListRiwayatPasien() {
+        return listRiwayatPasien;
+    }
+    
     public Pasien(ArrayList<RiwayatPasien> listRiwayatPasien, String Nama, String NIK, String Alamat, String Telepon, int Umur) {
         super(Nama, NIK, Alamat, Telepon, Umur);
         this.listRiwayatPasien = listRiwayatPasien;
     }
 
-    public ArrayList<RiwayatPasien> getListRiwayatPasien() {
-        return listRiwayatPasien;
-    }
+    
 
     public void setListRiwayatPasien(ArrayList<RiwayatPasien> listRiwayatPasien) {
         this.listRiwayatPasien = listRiwayatPasien;
