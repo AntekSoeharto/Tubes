@@ -5,36 +5,57 @@
  */
 package Model;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
  *
  * @author hp
  */
-public class RiwayatPasien extends Riwayat{
-    private String NamaDokter;
+public class RiwayatPasien {
+    private String Penyakit;
+    private ArrayList<String> resepObat = new ArrayList<String>();
+    private Date tanggalKunjungan;
     
     
     public RiwayatPasien(){
         
     }
 
-    public RiwayatPasien(String NamaDokter, Date Tanggal, String Keluhan, String Solusi) {
-        super(Tanggal, Keluhan, Solusi);
-        this.NamaDokter = NamaDokter;
+    public RiwayatPasien(ArrayList<String> resepObat, String Penyakit, Date tanggalKunjungan) {
+        this.resepObat = resepObat;
+        this.Penyakit = Penyakit;
+        this.tanggalKunjungan = tanggalKunjungan;
     }
 
-    public String getNamaDokter() {
-        return NamaDokter;
+    public String getPenyakit() {
+        return Penyakit;
     }
 
-    public void setNamaDokter(String NamaDokter) {
-        this.NamaDokter = NamaDokter;
+    public void setPenyakit(String Penyakit) {
+        this.Penyakit = Penyakit;
+    }
+
+    public ArrayList<String> getResepObat() {
+        return resepObat;
+    }
+
+    public void setResepObat(ArrayList<String> resepObat) {
+        this.resepObat = resepObat;
+    }
+
+    public Date getTanggalKunjungan() {
+        return tanggalKunjungan;
+    }
+
+    public void setTanggalKunjungan(Date tanggalKunjungan) {
+        this.tanggalKunjungan = tanggalKunjungan;
     }
 
     @Override
     public String toString() {
-        return super.toString() + "   RiwayatPasien{" + "NamaDokter=" + NamaDokter + '}';
-    } 
+        return "RiwayatPasien{" + "Penyakit=" + Penyakit + ", resepObat=" + resepObat + ", tanggalKunjungan=" + tanggalKunjungan + '}';
+    }
+
     
 }
