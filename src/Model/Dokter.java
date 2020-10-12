@@ -9,10 +9,11 @@ import java.util.ArrayList;
 public class Dokter extends User{
     private String NID;
     private String Poliklinik;
+    private double Gaji;
     private ArrayList<AbsensiDokter> Absen = new ArrayList<AbsensiDokter>();
     private ArrayList<String> listPendidikan = new ArrayList<String>();
     private ArrayList<String> listKarir = new ArrayList<String>();
-    private double Gaji;
+    
     
     public Dokter(){   
         
