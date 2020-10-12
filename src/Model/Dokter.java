@@ -11,7 +11,7 @@ public class Dokter extends User{
     private String Poliklinik;
     private Double Gaji;
     private ArrayList<RiwayatDokter> listRiwayatDokter = new ArrayList<RiwayatDokter>();
-    public Dokter(){
+    public Dokter(){   
         
     }
     
