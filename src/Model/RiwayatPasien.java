@@ -52,14 +52,9 @@ public class RiwayatPasien extends Riwayat{
 
     @Override
     public String toString() {
-
-        return "RiwayatPasien{" + "Penyakit=" + Penyakit + ", resepObat=" + resepObat + ", tanggalKunjungan=" + tanggalKunjungan + '}';
+        return "RiwayatPasien{" + "Penyakit=" + penyakit + ", resepObat=" + resepObat + ", tanggalKunjungan=" + tanggalKunjungan + '}';
     }
 
-
-        return super.toString() + "RiwayatPasien{" + "penyakit=" + penyakit + ", resepObat=" + resepObat + ", tanggalKunjungan=" + tanggalKunjungan + '}';
-    }
-    
 
     
 }
