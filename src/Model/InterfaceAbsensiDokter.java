@@ -13,4 +13,6 @@ public interface InterfaceAbsensiDokter {
     StatusAbsensi ALPHA = StatusAbsensi.ALPHA;
     StatusAbsensi IZIN = StatusAbsensi.IZIN;
     StatusAbsensi MASUK = StatusAbsensi.MASUK;
+    
+    public void absenDokter(StatusAbsensi absen);
 }
