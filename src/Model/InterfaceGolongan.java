@@ -11,6 +11,6 @@ package Model;
  */
 public interface InterfaceGolongan {
     
-    int BPJS = 1;
-    int NON_BPJS = 0;
+    GolonganPasien BPJS = GolonganPasien.BPJS;
+    GolonganPasien NON_BPJS = GolonganPasien.NON_BPJS;
 }
