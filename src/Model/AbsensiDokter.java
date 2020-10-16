@@ -47,5 +47,8 @@ public class AbsensiDokter implements InterfaceAbsensiDokter{
         return "AbsensiDokter{" + "tanggal=" + tanggal + ", Status=" + Status + '}';
     }
     
-    
+    @Override
+    public void absenDokter(StatusAbsensi absen){
+        setStatus(absen);
+    }
 }
