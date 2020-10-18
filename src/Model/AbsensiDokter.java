@@ -5,7 +5,10 @@
  */
 package Model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.JOptionPane;
+import Controller.Controller;
 
 /**
  *
@@ -48,7 +51,44 @@ public class AbsensiDokter implements InterfaceAbsensiDokter{
     }
     
     @Override
-    public void absenDokter(StatusAbsensi absen){
-        setStatus(absen);
+    public void absenDokter(AbsensiDokter absenDokter){
+        Controller c = new Controller();
+        ArrayList<Dokter> listDokter = c.getDokters();
+        int i = 0;
+        boolean found = false;
+        boolean statusMasuk = true;
+        String namaDokter = JOptionPane.showInputDialog("masukkan nama dokter : ");
+  
+        absenDokter.tanggal = new Date();
+        
+        boolean statusIzin = Boolean.parseBoolean(JOptionPane.showInputDialog(""
+                + "1. ya"
+                + "\n0.tidak"
+                + "\napakah dokter izin? :"));
+        
+        
+        while(i < listDokter.size() && !found){
+//            String listNama = ;
+            if(namaDokter.equals(listDokter.get(i).getNama())){
+                found = true;
+            }else{
+                i++;
+            }
+        }
+        
+//        StatusAbsensi absen;
+        if(found == true){
+            if(statusIzin == false && statusMasuk == true){
+                absenDokter.Status = MASUK;
+            }else if(statusIzin == true){
+                absenDokter.Status = IZIN;
+            }else if(statusIzin == false && statusMasuk == false){
+                absenDokter.Status = ALPHA;
+            }
+        }else{
+            JOptionPane.showMessageDialog(null,"Nama tidak ditemukan!");
+        }
+        
+        
     }
 }
