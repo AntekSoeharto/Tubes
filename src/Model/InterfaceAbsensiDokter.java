@@ -5,12 +5,17 @@
  */
 package Model;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 /**
  *
  * @author hp
  */
 public interface InterfaceAbsensiDokter {
-    int ALPHA = 0;
-    int IZIN = 1;
-    int MASUK = 2;
+    StatusAbsensi ALPHA = StatusAbsensi.ALPHA;
+    StatusAbsensi IZIN = StatusAbsensi.IZIN;
+    StatusAbsensi MASUK = StatusAbsensi.MASUK;
+    
+    public void absenDokter(AbsensiDokter absenDokter);
 }
