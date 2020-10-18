@@ -5,6 +5,9 @@
  */
 package Model;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 /**
  *
  * @author hp
@@ -14,5 +17,5 @@ public interface InterfaceAbsensiDokter {
     StatusAbsensi IZIN = StatusAbsensi.IZIN;
     StatusAbsensi MASUK = StatusAbsensi.MASUK;
     
-    public void absenDokter(StatusAbsensi absen);
+    public void absenDokter(AbsensiDokter absenDokter);
 }
