@@ -13,7 +13,8 @@ import java.util.List;
  *
  * @author hp
  */
-public class RiwayatPasien extends Riwayat{
+public class RiwayatPasien{
+    private String keluhan;
     private String penyakit;
     private List<String> resepObat = new ArrayList<String>();
     private Date tanggalKunjungan;
@@ -21,8 +22,18 @@ public class RiwayatPasien extends Riwayat{
     public RiwayatPasien() {
     }
 
-    public RiwayatPasien(Date Tanggal, String Keluhan, String Solusi) {
-        super(Tanggal, Keluhan, Solusi);
+    public RiwayatPasien(String keluhan, String penyakit, Date tanggalKunjungan) {
+        this.keluhan = keluhan;
+        this.penyakit = penyakit;
+        this.tanggalKunjungan = tanggalKunjungan;
+    }
+
+    public String getKeluhan() {
+        return keluhan;
+    }
+
+    public void setKeluhan(String keluhan) {
+        this.keluhan = keluhan;
     }
 
     public String getPenyakit() {
@@ -38,7 +49,6 @@ public class RiwayatPasien extends Riwayat{
     }
 
     public void setResepObat(List<String> resepObat) {
-
         this.resepObat = resepObat;
     }
 
@@ -50,11 +60,11 @@ public class RiwayatPasien extends Riwayat{
         this.tanggalKunjungan = tanggalKunjungan;
     }
 
-    @Override
     public String toString() {
-        return "RiwayatPasien{" + "Penyakit=" + penyakit + ", resepObat=" + resepObat + ", tanggalKunjungan=" + tanggalKunjungan + '}';
+        return "RiwayatPasien{" + "keluhan=" + keluhan + ", penyakit=" + penyakit + ", resepObat=" + resepObat + ", tanggalKunjungan=" + tanggalKunjungan + '}';
     }
-
+    
+    
 
     
 }

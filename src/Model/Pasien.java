@@ -13,8 +13,6 @@ import java.util.ArrayList;
  */
 public class Pasien extends User implements InterfaceGolongan{
     private ArrayList<RiwayatPasien> listRiwayatPasien = new ArrayList<RiwayatPasien>();
-
-
     private GolonganPasien BPJS;
 
     
@@ -63,7 +61,18 @@ public class Pasien extends User implements InterfaceGolongan{
         return "Pasien{" + "listRiwayatPasien=" + listRiwayatPasien + ", BPJS=" + BPJS + '}';
     }
 
-    
+    public void pasienBaru(){
+        
+    }
+    public void ubahDataPasien(){
+        
+    }
+    public void buatJanjidgDokter(){
+        
+    }
+    public void rawatJalan(){
+        
+    }
     
     
 }
