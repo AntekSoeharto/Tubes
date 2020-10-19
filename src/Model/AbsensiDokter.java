@@ -56,19 +56,16 @@ public class AbsensiDokter implements InterfaceAbsensiDokter{
         ArrayList<Dokter> listDokter = c.getDokters();
         int i = 0;
         boolean found = false;
-        boolean statusMasuk = true;
         String namaDokter = JOptionPane.showInputDialog("masukkan nama dokter : ");
   
         absenDokter.tanggal = new Date();
         
-        boolean statusIzin = Boolean.parseBoolean(JOptionPane.showInputDialog(""
-                + "1. ya"
-                + "\n0.tidak"
-                + "\napakah dokter izin? :"));
+        int statusIzin = Integer.parseInt(JOptionPane.showInputDialog("apa yang mau anda lakukan?"
+                + "\n1. izin"
+                + "\n2. absen"));
         
         
         while(i < listDokter.size() && !found){
-//            String listNama = ;
             if(namaDokter.equals(listDokter.get(i).getNama())){
                 found = true;
             }else{
@@ -76,19 +73,19 @@ public class AbsensiDokter implements InterfaceAbsensiDokter{
             }
         }
         
-//        StatusAbsensi absen;
         if(found == true){
-            if(statusIzin == false && statusMasuk == true){
+            if(statusIzin == 2){
                 absenDokter.Status = MASUK;
-            }else if(statusIzin == true){
+            }else if(statusIzin == 1){
                 absenDokter.Status = IZIN;
-            }else if(statusIzin == false && statusMasuk == false){
+            }else{
                 absenDokter.Status = ALPHA;
             }
         }else{
             JOptionPane.showMessageDialog(null,"Nama tidak ditemukan!");
         }
         
-        
+        listDokter.get(i).setAbsen(listDokter.get(i).getAbsen(),absenDokter);
+
     }
 }
