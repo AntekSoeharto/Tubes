@@ -18,8 +18,7 @@ public class Main {
         AD.absenDokter(AD);
         Dokter d = new Dokter();
         ArrayList<AbsensiDokter> LAD = new ArrayList<>();
-        LAD.add(AD);
-        d.setAbsen(LAD);
+        d.setAbsen(LAD,AD);
         int i = 0;
         
 
