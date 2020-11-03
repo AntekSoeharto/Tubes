@@ -5,22 +5,26 @@
  */
 package Model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.JOptionPane;
+import Controller.Controller;
 
 /**
  *
  * @author hp
  */
 public class AbsensiDokter implements InterfaceAbsensiDokter{
-    private int Status;
     private Date tanggal;
+    private StatusAbsensi Status;
+
     
     
     public AbsensiDokter(){
         
     }
 
-    public AbsensiDokter(Date tanggal, int Status) {
+    public AbsensiDokter(Date tanggal, StatusAbsensi Status) {
         this.tanggal = tanggal;
         this.Status = Status;
     }
@@ -33,11 +37,11 @@ public class AbsensiDokter implements InterfaceAbsensiDokter{
         this.tanggal = tanggal;
     }
 
-    public int getStatus() {
+    public StatusAbsensi getStatus() {
         return Status;
     }
 
-    public void setStatus(int Status) {
+    public void setStatus(StatusAbsensi Status) {
         this.Status = Status;
     }
 
@@ -46,5 +50,42 @@ public class AbsensiDokter implements InterfaceAbsensiDokter{
         return "AbsensiDokter{" + "tanggal=" + tanggal + ", Status=" + Status + '}';
     }
     
-    
+    @Override
+    public void absenDokter(AbsensiDokter absenDokter){
+        Controller c = new Controller();
+        ArrayList<Dokter> listDokter = c.getDokters();
+        int i = 0;
+        boolean found = false;
+        String namaDokter = JOptionPane.showInputDialog("masukkan nama dokter : ");
+  
+        absenDokter.tanggal = new Date();
+        
+        int statusIzin = Integer.parseInt(JOptionPane.showInputDialog("apa yang mau anda lakukan?"
+                + "\n1. izin"
+                + "\n2. absen"));
+        
+        
+        while(i < listDokter.size() && !found){
+            if(namaDokter.equals(listDokter.get(i).getNama())){
+                found = true;
+            }else{
+                i++;
+            }
+        }
+        
+        if(found == true){
+            if(statusIzin == 2){
+                absenDokter.Status = MASUK;
+            }else if(statusIzin == 1){
+                absenDokter.Status = IZIN;
+            }else{
+                absenDokter.Status = ALPHA;
+            }
+        }else{
+            JOptionPane.showMessageDialog(null,"Nama tidak ditemukan!");
+        }
+        
+        listDokter.get(i).setAbsen(listDokter.get(i).getAbsen(),absenDokter);
+
+    }
 }

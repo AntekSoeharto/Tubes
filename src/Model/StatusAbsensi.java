@@ -5,13 +5,12 @@
  */
 package Model;
 
+import javax.crypto.IllegalBlockSizeException;
+
 /**
  *
  * @author V for Vladimir
  */
-public class NewClass {
-    public void printtest(){
-        System.out.print("hello");
-    }
-    
+public enum StatusAbsensi {
+    ALPHA,MASUK,IZIN;
 }
