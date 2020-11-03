@@ -57,11 +57,7 @@ public class LoginScreen implements ActionListener{
     }
     
     
-    public static void main(String[] args){
-        new LoginScreen();
-    }
-    
-    
+
     
     @Override
     public void actionPerformed(ActionEvent ae) {
