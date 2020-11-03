@@ -12,17 +12,9 @@ import Controller.Controller;
  *
  * @author hp
  */
+import View.LoginScreen;
 public class Main {
     public static void main(String[] args){
-        AbsensiDokter AD = new AbsensiDokter();
-        AD.absenDokter(AD);
-        Dokter d = new Dokter();
-        ArrayList<AbsensiDokter> LAD = new ArrayList<>();
-        d.setAbsen(LAD,AD);
-        int i = 0;
-        
-
-        
+        new LoginScreen();
     }
-    
 }
