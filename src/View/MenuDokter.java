@@ -16,9 +16,8 @@ import javax.swing.JPanel;
  *
  * @author hp
  */
-public class MenuAdmin implements ActionListener{
-    
-    JFrame frame = new JFrame("MenuAdmin");
+public class MenuDokter implements ActionListener{
+    JFrame frame = new JFrame("MenuDokter");
     JPanel menu = new JPanel();
     JPanel isi = new JPanel();
     
@@ -26,7 +25,7 @@ public class MenuAdmin implements ActionListener{
     JButton menu_dokter = new JButton("DOKTER");
     JButton menu_admin = new JButton("ADMINISTRASI");
     
-    public MenuAdmin(){
+    public MenuDokter(){
         
         frame.setSize(1200, 700);
         frame.setLocationRelativeTo(null);
@@ -53,7 +52,6 @@ public class MenuAdmin implements ActionListener{
         frame.setVisible(true);
     }
 
-    @Override
     public void actionPerformed(ActionEvent ae) {
         String command = ae.getActionCommand();
         switch(command) {

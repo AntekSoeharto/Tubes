@@ -18,7 +18,7 @@ import javax.swing.JPanel;
  */
 public class MenuPasien implements ActionListener{
     
-    JFrame frame = new JFrame("MainMenu");
+    JFrame frame = new JFrame("MenuPasien");
     JPanel menu = new JPanel();
     JPanel isi = new JPanel();
     
@@ -60,11 +60,11 @@ public class MenuPasien implements ActionListener{
                 new MenuPasien();
                 frame.setVisible(false);
                 break;
-            case "UPDATE":
+            case "DOKTER":
                 new MenuDokter();
                 frame.setVisible(false);
                 break;
-            case "DELETE":
+            case "ADMINISTRASI":
                 new MenuAdmin();
                 frame.setVisible(false);
                 break;
