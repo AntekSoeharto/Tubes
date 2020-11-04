@@ -16,6 +16,5 @@ public class ControllerDokter {
     public static boolean addDokter(){
         
         return(true);
-        
     }
 }

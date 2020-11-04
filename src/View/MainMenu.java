@@ -57,7 +57,6 @@ public class MainMenu implements ActionListener{
         frame.add(isi);
         frame.add(menu);
         frame.setVisible(true);
-        
     }
     
     
