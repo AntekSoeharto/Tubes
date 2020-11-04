@@ -24,10 +24,10 @@ public class Controller {
 //    }
     public ArrayList<Dokter> getDokters(){
         ArrayList<Dokter> listDokters = new ArrayList<Dokter>();
-        Dokter dokter = new Dokter(new ArrayList<AbsensiDokter>(),null, null, 0,"123", "gigi", "hansen", "0123", "abc", "0888", 0);
-        Dokter dokter1 = new Dokter(new ArrayList<AbsensiDokter>(),null, null, 0,"456", "THT", "john", "0456", "def", "0889", 0);
-        listDokters.add(dokter);
-        listDokters.add(dokter1);
+        //Dokter dokter = new Dokter(new ArrayList<AbsensiDokter>(),null, null, 0,"123", "gigi", "hansen", "0123", "abc", "0888", 0);
+        //Dokter dokter1 = new Dokter(new ArrayList<AbsensiDokter>(),null, null, 0,"456", "THT", "john", "0456", "def", "0889", 0);
+//        listDokters.add(dokter);
+//        listDokters.add(dokter1);
         return listDokters;
     }
 }
