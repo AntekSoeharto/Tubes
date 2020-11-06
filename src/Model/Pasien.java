@@ -45,7 +45,7 @@ public class Pasien extends User implements InterfaceGolongan{
             Date tglLahir, 
             String Alamat,
             String Telepon,
-            char golonganDarah,
+            String golonganDarah,
             String gender) {
         super(Nama, NIK, tglLahir, Alamat, Telepon, golonganDarah,gender);
         this.BPJS = BPJS;
