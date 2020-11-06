@@ -26,7 +26,6 @@ public class ControllerStaff {
     static DBHandler conn = new DBHandler();
 
     public boolean Login(String username, String password){
-        
         return(true);
     }
     
