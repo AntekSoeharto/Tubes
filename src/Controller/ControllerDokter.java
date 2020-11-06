@@ -5,6 +5,9 @@
  */
 package Controller;
 
+import Model.Dokter;
+import java.util.ArrayList;
+
 /**
  *
  * @author hp
@@ -16,5 +19,9 @@ public class ControllerDokter {
     public static boolean addDokter(){
         
         return(true);
+    }
+    public ArrayList<Dokter> getDokters(){
+        ArrayList<Dokter> listDokters = new ArrayList<Dokter>();
+        return listDokters;
     }
 }
