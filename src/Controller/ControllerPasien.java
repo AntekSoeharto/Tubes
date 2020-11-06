@@ -18,7 +18,7 @@ import java.util.Date;
  */
 public class ControllerPasien {
     public ControllerPasien(){
-
+        
     }
     static DatabaseHandler conn = new DatabaseHandler();
 

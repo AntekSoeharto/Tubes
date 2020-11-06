@@ -21,7 +21,6 @@ public class ControllerDokter {
         return(true);
     }
     public ArrayList<Dokter> getDokters(){
-        ArrayList<Dokter> listDokters = new ArrayList<Dokter>();
-        return listDokters;
+        return null;
     }
 }
