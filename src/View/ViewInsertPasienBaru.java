@@ -150,7 +150,7 @@ public class ViewInsertPasienBaru implements InterfaceGolongan{
                 pt.setAlamat(alamatTextField.getText());
                 pt.setPenyakitMenurun(penyakitMenurunTextField.getText());
                 pt.setAlergi(alergiTextField.getText());
-                pt.setGolonganDarah(goldarTextField.getText().charAt(0));
+                pt.setGolDar(goldarTextField.getText());
                 pt.setTglLahir((Date)tglLahir.getModel().getValue());
                 pt.setTelepon(noKontakTextField.getText());
                 String gender = "";
@@ -164,7 +164,7 @@ public class ViewInsertPasienBaru implements InterfaceGolongan{
                 }else if(nonBPJSRadioButton.isSelected()){
                     pt.setBPJS(NON_BPJS);
                 }
-                pt.setJenisKelamin(gender);
+                pt.setGender(gender);
                 pt.setListRiwayatPasien(new ArrayList<>());
                 
                 pt.pasienBaru(pt);
