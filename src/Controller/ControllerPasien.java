@@ -35,8 +35,8 @@ public class ControllerPasien {
                 pasien.setNIK(rs.getString("NIK"));
                 pasien.setNama(rs.getString("Nama"));
                 pasien.setTglLahir((Date) rs.getObject("Tgl_lahir"));
-                pasien.setGolonganDarah(rs.getString("Goldar").charAt(0));
-                pasien.setJenisKelamin(rs.getString("Gender"));
+                pasien.setGolDar(rs.getString("Goldar"));
+                pasien.setGender(rs.getString("Gender"));
                 pasien.setAlergi(rs.getString("Alergi"));
                 pasien.setPenyakitMenurun(rs.getString("Penyakit_Menurun"));
                 pasien.setBPJS((GolonganPasien) rs.getObject("Golongan"));
@@ -62,8 +62,8 @@ public class ControllerPasien {
                 pasien.setNIK(rs.getString("NIK"));
                 pasien.setNama(rs.getString("Nama"));
                 pasien.setTglLahir((Date) rs.getObject("Tgl_lahir"));
-                pasien.setGolonganDarah(rs.getString("Goldar").charAt(0));
-                pasien.setJenisKelamin(rs.getString("Gender"));
+                pasien.setGolDar(rs.getString("Goldar"));
+                pasien.setGender(rs.getString("Gender"));
                 pasien.setAlergi(rs.getString("Alergi"));
                 pasien.setPenyakitMenurun(rs.getString("Penyakit_Menurun"));
                 pasien.setBPJS((GolonganPasien) rs.getObject("Golongan"));
@@ -86,8 +86,8 @@ public class ControllerPasien {
             stmt.setString(1, pasien.getNIK());
             stmt.setString(2, pasien.getNama());
             stmt.setObject(3, pasien.getTglLahir());
-            stmt.setString(4, String.valueOf(pasien.getGolonganDarah()));
-            stmt.setString(5, pasien.getJenisKelamin());
+            stmt.setString(4, String.valueOf(pasien.getGolDar()));
+            stmt.setString(5, pasien.getGender());
             stmt.setString(6, pasien.getAlergi());
             stmt.setString(7, pasien.getPenyakitMenurun());
             stmt.setObject(8, pasien.getBPJS());
