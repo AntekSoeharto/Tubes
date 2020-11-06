@@ -5,6 +5,8 @@
  */
 package Model;
 
+import java.util.Date;
+
 /**
  *
  * @author hp
@@ -12,20 +14,22 @@ package Model;
 public abstract class User {
     private String Nama;
     private String NIK;
-    private int Umur;
+    private Date tglLahir;
+    private String golDar;
+    private String gender;
     private String Alamat;
     private String Telepon;
-    
-    public User(){
-        
-    }
-
-    public User(String Nama, String NIK, String Alamat, String Telepon, int Umur) {
+     public User(){
+         
+     }
+    public User(String Nama, String NIK, Date tglLahir, String golDar, String gender, String Alamat, String Telepon) {
         this.Nama = Nama;
         this.NIK = NIK;
+        this.tglLahir = tglLahir;
+        this.golDar = golDar;
+        this.gender = gender;
         this.Alamat = Alamat;
         this.Telepon = Telepon;
-        this.Umur = Umur;
     }
 
     public String getNama() {
@@ -35,14 +39,6 @@ public abstract class User {
     public void setNama(String Nama) {
         this.Nama = Nama;
     }
-    
-    public int getUmur() {
-        return Umur;
-    }
-
-    public void setUmur(int Umur) {
-        this.Umur = Umur;
-    }
 
     public String getNIK() {
         return NIK;
@@ -50,6 +46,30 @@ public abstract class User {
 
     public void setNIK(String NIK) {
         this.NIK = NIK;
+    }
+
+    public Date getTglLahir() {
+        return tglLahir;
+    }
+
+    public void setTglLahir(Date tglLahir) {
+        this.tglLahir = tglLahir;
+    }
+
+    public String getGolDar() {
+        return golDar;
+    }
+
+    public void setGolDar(String golDar) {
+        this.golDar = golDar;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public String getAlamat() {
@@ -70,8 +90,10 @@ public abstract class User {
 
     @Override
     public String toString() {
-        return "User{" + "Nama=" + Nama + ", NIK=" + NIK + ", Alamat=" + Alamat + ", Telepon=" + Telepon + '}';
+        return super.toString() + "User{" + "Nama=" + Nama + ", NIK=" + NIK + ", tglLahir=" + tglLahir + ", golDar=" + golDar + ", gender=" + gender + ", Alamat=" + Alamat + ", Telepon=" + Telepon + '}';
     }
+    
+    
     
     
 }
