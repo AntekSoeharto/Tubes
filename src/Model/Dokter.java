@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -18,16 +19,20 @@ public class Dokter extends User{
     public Dokter(){   
         
     }
-    
-    public Dokter(ArrayList<AbsensiDokter> Absen, ArrayList<String> listPendidikan, ArrayList<String> listKarir, double Gaji, String NID, String Poliklinik, String Nama, String NIK, String Alamat, String Telepon, int Umur) {
-        super(Nama, NIK, Alamat, Telepon, Umur);
-        this.listKarir = listKarir;
-        this.listPendidikan = listPendidikan;
-        this.Absen = Absen;
-        this.Gaji = Gaji;
+
+    public Dokter(String NID, String Poliklinik, double Gaji) {
         this.NID = NID;
         this.Poliklinik = Poliklinik;
+        this.Gaji = Gaji;
     }
+
+    public Dokter(String NID, String Poliklinik, double Gaji, String Nama, String NIK, Date tglLahir, String golDar, String gender, String Alamat, String Telepon) {
+        super(Nama, NIK, tglLahir, golDar, gender, Alamat, Telepon);
+        this.NID = NID;
+        this.Poliklinik = Poliklinik;
+        this.Gaji = Gaji;
+    }
+    
 
     public String getNID() {
         return NID;
