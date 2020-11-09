@@ -7,14 +7,15 @@ package Main;
 import Model.*;
 import java.util.ArrayList;
 import java.util.Date;
-import Controller.Controller;
+import Controller.ControllerStaff;
+import View.LoginScreen;
 /**
  *
  * @author hp
  */
-import View.LoginScreen;
 public class Main {
     public static void main(String[] args){
         new LoginScreen();
+        
     }
 }

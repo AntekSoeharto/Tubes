@@ -8,7 +8,7 @@ package Model;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
-import Controller.Controller;
+import Controller.ControllerDokter;
 
 /**
  *
@@ -52,8 +52,8 @@ public class AbsensiDokter implements InterfaceAbsensiDokter{
     
     @Override
     public void absenDokter(AbsensiDokter absenDokter){
-        Controller c = new Controller();
-        ArrayList<Dokter> listDokter = c.getDokters();
+        ControllerDokter cd = new ControllerDokter();
+        ArrayList<Dokter> listDokter = cd.getDokters();
         int i = 0;
         boolean found = false;
         String namaDokter = JOptionPane.showInputDialog("masukkan nama dokter : ");

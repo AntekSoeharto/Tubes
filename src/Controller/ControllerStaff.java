@@ -7,28 +7,8 @@ package Controller;
 
 /**
  *
- * @author hp
+ * @author V for Vladimir
  */
-
-import model.*;
-import view.*;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-
 public class ControllerStaff {
-    public ControllerStaff(){
-        
-    }
-    
-    static DBHandler conn = new DBHandler();
-
-    public boolean Login(String username, String password){
-        
-        return(true);
-    }
-    
     
 }
