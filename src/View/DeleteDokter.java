@@ -109,8 +109,4 @@ public class DeleteDokter implements ActionListener{
         }
     }
     
-    public static void main(String[] args){
-        new PreUpdateDokter();
-    }
-    
 }
