@@ -65,8 +65,7 @@ public class LoginScreen implements ActionListener{
         if(command == "LOGIN"){
             if(textusername.getText().equals("") || textpassword.getText().equals("")){
                 JOptionPane.showMessageDialog(null,"Username Atau Password Harus Di isi");
-            }else{
-                
+            }else{  
                 new MainMenu();
                 frame.setVisible(false);
             }
