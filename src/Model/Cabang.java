@@ -15,6 +15,7 @@ public class Cabang{
     private String Alamat;
     private String Telepon;
     private String Nama;
+    private String idCabang;
     private ArrayList<Dokter> listDokter = new ArrayList<Dokter>();
     private ArrayList<Obat> listobat = new ArrayList<Obat>();
     private ArrayList<Transaksi> listTransaksi = new ArrayList<Transaksi>();
@@ -23,13 +24,14 @@ public class Cabang{
         
     }
 
-    public Cabang(ArrayList<Dokter> listDokter, ArrayList<Obat> listobat, ArrayList<Transaksi> listTransaksi, String Alamat, String Telepon, String Nama) {
+    public Cabang(ArrayList<Dokter> listDokter, ArrayList<Obat> listobat, ArrayList<Transaksi> listTransaksi, String Alamat, String Telepon, String Nama, String idCabang) {
         this.listTransaksi = listTransaksi;
         this.listobat = listobat;
         this.listDokter = listDokter;
         this.Alamat = Alamat;
         this.Nama = Nama;
         this.Telepon = Telepon;
+        this.idCabang = idCabang;
         
     }
 
@@ -64,8 +66,6 @@ public class Cabang{
     public void setListTransaksi(ArrayList<Transaksi> listTransaksi) {
         this.listTransaksi = listTransaksi;
     }
-    
-    
     
     public String getTelepon() {
         return Telepon;
