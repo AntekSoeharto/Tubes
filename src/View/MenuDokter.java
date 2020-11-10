@@ -24,6 +24,11 @@ public class MenuDokter implements ActionListener{
     JButton menu_pasien = new JButton("PASIEN");
     JButton menu_dokter = new JButton("DOKTER");
     JButton menu_admin = new JButton("ADMINISTRASI");
+    JButton insert_dokter = new JButton("INSERT DOKTER");
+    JButton update_dokter = new JButton("UPDATE DOKTER");
+    JButton delete_dokter = new JButton("DELETE DOKTER");
+    JButton absensi_dokter = new JButton("ABSENSI DOKTER");
+    
     
     public MenuDokter(){
         
@@ -45,6 +50,18 @@ public class MenuDokter implements ActionListener{
         menu_dokter.addActionListener(this);
         menu_pasien.addActionListener(this);
         menu_admin.addActionListener(this);
+        insert_dokter.setBounds(350,150,200,50);
+        isi.add(insert_dokter);
+        update_dokter.setBounds(350,250,200,50);
+        isi.add(update_dokter);
+        delete_dokter.setBounds(350,350,200,50);
+        isi.add(delete_dokter);
+        absensi_dokter.setBounds(350,450,200,50);
+        isi.add(absensi_dokter);
+        insert_dokter.addActionListener(this);
+        update_dokter.addActionListener(this);
+        delete_dokter.addActionListener(this);
+        absensi_dokter.addActionListener(this);
         
         
         frame.add(isi);
@@ -67,8 +84,23 @@ public class MenuDokter implements ActionListener{
                 new MenuAdmin();
                 frame.setVisible(false);
                 break;
+            case "INSERT DOKTER":
+                new InputDokter();
+                frame.setVisible(false);
+                break;
+            case "UPDATE DOKTER":
+                new PreUpdateDokter();
+                frame.setVisible(false);
+                break;
+            case "DELETE DOKTER":
+                new DeleteDokter();
+                frame.setVisible(false);
+                break;
             default: 
                 break;
         }
+    }
+    public static void main(String[] args){
+        new MenuDokter();
     }
 }
