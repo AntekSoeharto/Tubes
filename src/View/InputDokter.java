@@ -9,6 +9,7 @@ package View;
  *
  * @author hp
  */
+import Model.*;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -23,10 +24,17 @@ import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 import Controller.*;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class InputDokter implements ActionListener{
-    //private ControllerDokter control = new ControllerDokter();
+    private ControllerDokter control = new ControllerDokter();
     JFrame frame = new JFrame("MenuDokter");
     JPanel menu = new JPanel();
     JPanel isi = new JPanel();
@@ -53,6 +61,15 @@ public class InputDokter implements ActionListener{
     JRadioButton female = new JRadioButton("Wanita");
     JTextField textNid = new JTextField();
     JTextField textNotelp = new JTextField();
+    JRadioButton golo = new JRadioButton("O");
+    JRadioButton gola = new JRadioButton("A");
+    JRadioButton golb = new JRadioButton("B");
+    JRadioButton golab = new JRadioButton("AB");
+    String[] listPoli = {"Belum Dipilih", "Dokter Umum", "Dokter Spesialis Anak", "Dokter THT"};
+    JComboBox Poli = new JComboBox(listPoli);
+    JTextField textAlamat = new JTextField();
+    JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
+    JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
     
     
     
@@ -99,8 +116,7 @@ public class InputDokter implements ActionListener{
         p.put("text.today", "Today");
         p.put("text.month", "Month");
         p.put("text.year", "Year");
-        JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
-        JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+        
         datePicker.setBounds(130, 130, 250, 30);
         labTgllahir.setBounds(50, 140, 80, 20);
         datePicker.setBounds(200, 140, 300, 30);
@@ -109,10 +125,6 @@ public class InputDokter implements ActionListener{
         
         labGoldar.setBounds(50, 180, 80, 20);
         isi.add(labGoldar);
-        JRadioButton golo = new JRadioButton("O");
-        JRadioButton gola = new JRadioButton("A");
-        JRadioButton golb = new JRadioButton("B");
-        JRadioButton golab = new JRadioButton("AB");
         golo.setBounds(200, 180, 50, 15);
         gola.setBounds(250, 180, 50, 15);
         golb.setBounds(300, 180, 50, 15);
@@ -138,21 +150,30 @@ public class InputDokter implements ActionListener{
         isi.add(female);
         
         labNid.setBounds(50, 250, 80, 20);
-        isi.add(labNama);
+        isi.add(labNid);
         textNid.setBounds(200, 250, 300, 20);
-        isi.add(textNama);
+        isi.add(textNid);
         
         labPoli.setBounds(50, 280, 80, 20);
         isi.add(labPoli);
-        String[] listPoli = {"Belum Dipilih", "Dokter Umum", "Dokter Spesialis Anak", "Dokter THT"};
-        JComboBox Poli = new JComboBox(listPoli);
         Poli.setBounds(200, 280, 300, 20);
         isi.add(Poli);
         
-        labNotelp.setBounds(50, 250, 80, 20);
+        labNotelp.setBounds(50, 310, 80, 20);
         isi.add(labNotelp);
-        textNotelp.setBounds(200, 250, 300, 20);
+        textNotelp.setBounds(200, 310, 300, 20);
         isi.add(textNotelp);
+        
+        labAlamat.setBounds(50, 340, 80, 20);
+        isi.add(labAlamat);
+        textAlamat.setBounds(200, 340, 300, 20);
+        isi.add(textAlamat);
+        
+        
+        
+        submit.setBounds(350,400,120,50);
+        submit.addActionListener(this);
+        isi.add(submit);
         
         
         frame.add(isi);
@@ -175,18 +196,47 @@ public class InputDokter implements ActionListener{
                 new MenuAdmin();
                 frame.setVisible(false);
                 break;
-                
             case "SUBMIT":
-                String strnik = tex
+                String strnik = textNik.getText();
+                String strnama = textNik.getText();
                 String strlahir = model.getDay() + "-" + model.getMonth() + "-" + model.getYear();
-                System.out.println(strlahir);
+                String strgoldar = "";
+                if (gola.isSelected()) {
+                    strgoldar = gola.getText();
+                } else if (golb.isSelected()) {
+                    strgoldar = golb.getText();
+                } else if (golo.isSelected()) {
+                    strgoldar = golo.getText();
+                } else if (golab.isSelected()) {
+                    strgoldar = golab.getText();
+                }
+                
+                String strgender = "";
+                if (male.isSelected()) {
+                    strgender = male.getText();
+                } else if (female.isSelected()) {
+                    strgender = female.getText();
+                }
+                
+                String strnid = textNid.getText();
+                String strpoli = "";
+                strpoli = String.valueOf(Poli.getSelectedItem());
+                String strnotelp = textNotelp.getText();
+                String stralamat = textAlamat.getText();
+                
+                Date lahir = (Date)datePicker.getModel().getValue();
+                Dokter dokter = new Dokter(strnid, strpoli, strnama, strnik, lahir, strgoldar, strgender, stralamat, strnotelp);
+                boolean input = control.addDokter(dokter);
+                
+                
+                //pt.setTglLahir((Date)tglLahir.getModel().getValue());
+                
+                
             default: 
                 break;
         }
     }
     
-    public static void main(String[] args){
-        new InputDokter();
-    }
+    
     
 }
