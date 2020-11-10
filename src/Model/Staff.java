@@ -13,6 +13,14 @@ public class Staff{
     private String username;
     private String password;
     private String idCabang;
+
+    public Staff(String username, String password, String idCabang) {
+        this.username = username;
+        this.password = password;
+        this.idCabang = idCabang;
+    }
+    
+    
     
     
     public String getUsername() {
