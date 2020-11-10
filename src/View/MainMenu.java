@@ -10,6 +10,7 @@ package View;
  * @author hp
  */
 
+import Model.Singleton;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
