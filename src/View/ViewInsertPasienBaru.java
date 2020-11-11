@@ -5,11 +5,15 @@
  */
 package View;
 
+import Controller.ControllerViewPasien;
 import Model.DateLabelFormatter;
 import Model.GolonganPasien;
 import Model.InterfaceGolongan;
 import Model.Pasien;
 import Model.User;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
@@ -25,11 +29,14 @@ import javax.swing.JTextField;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import static javax.swing.JFrame.EXIT_ON_CLOSE;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 /**
  *
@@ -38,14 +45,22 @@ import java.sql.Statement;
 public class ViewInsertPasienBaru implements InterfaceGolongan{
     JFrame viewInsertNewPatient = new JFrame("Form Pasien Baru");
     JLabel NIKLabel,namaLabel,tglLahirLabel,alamatLabel,noKontakLabel,golonganLabel,
-            genderLabel,alergiLabel,goldarLabel,penyakitMenurunLabel;
+            genderLabel,alergiLabel,goldarLabel,penyakitMenurunLabel,rhesusLabel;
     JTextField NIKTextField,namaTextField,alamatTextField,noKontakTextField,
-            alergiTextField,goldarTextField,penyakitMenurunTextField;
-    JRadioButton BPJSRadioButton,nonBPJSRadioButton,wanitaRadioButton,priaRadioButton;
-    ButtonGroup genderButtonGroup,golonganButtonGroup;
+            alergiTextField,penyakitMenurunTextField;
+    JRadioButton BPJSRadioButton,nonBPJSRadioButton,
+            wanitaRadioButton,priaRadioButton,
+            golDarA,golDarB,golDarAB,golDarO,
+            rhesusMin,rhesusPlus;
+    ButtonGroup genderButtonGroup,golonganButtonGroup,goldarButtonGroup,rhesusButtonGroup;
     JButton insertNewPatient;
     JDatePickerImpl tglLahir;
     JDatePanelImpl datePanel;
+    JPanel panelContent,panelMenu,panelWithScroll;
+    JScrollPane panelScroll;
+    GridBagLayout gbl;
+    GridBagConstraints gbc;
+    ControllerViewPasien CVP;
     
     public ViewInsertPasienBaru(){
         NIKLabel = new JLabel("NIK");
@@ -58,11 +73,11 @@ public class ViewInsertPasienBaru implements InterfaceGolongan{
         alergiLabel = new JLabel("Alergi");
         goldarLabel = new JLabel("golongan darah");
         penyakitMenurunLabel = new JLabel("Penyakit Menurun");
-        NIKTextField = new JTextField();
-        namaTextField = new JTextField();
-        alergiTextField = new JTextField();
-        goldarTextField = new JTextField();
-        penyakitMenurunTextField = new JTextField();
+        rhesusLabel = new JLabel("Rhesus");
+        NIKTextField = new JTextField(20);
+        namaTextField = new JTextField(20);
+        alergiTextField = new JTextField(20);
+        penyakitMenurunTextField = new JTextField(20);
         UtilDateModel model = new UtilDateModel();
         Properties p = new Properties();
         p.put("text.today", "Today");
@@ -70,76 +85,115 @@ public class ViewInsertPasienBaru implements InterfaceGolongan{
         p.put("text.year", "Year");
         datePanel = new JDatePanelImpl(model, p);
         tglLahir = new JDatePickerImpl(datePanel,new DateLabelFormatter());
-        alamatTextField = new JTextField();
-        noKontakTextField = new JTextField();
+        alamatTextField = new JTextField(20);
+        noKontakTextField = new JTextField(20);
         BPJSRadioButton = new JRadioButton("BPJS");
         nonBPJSRadioButton = new JRadioButton("non BPJS");
         wanitaRadioButton = new JRadioButton("wanita");
         priaRadioButton = new JRadioButton("pria");
+        golDarA = new JRadioButton("A");
+        golDarB = new JRadioButton("B");
+        golDarAB = new JRadioButton("AB");
+        golDarO = new JRadioButton("O");
+        rhesusMin = new JRadioButton("-");
+        rhesusPlus = new JRadioButton("+");
+        goldarButtonGroup = new ButtonGroup();
         genderButtonGroup = new ButtonGroup();
         golonganButtonGroup = new ButtonGroup();
+        rhesusButtonGroup = new ButtonGroup();
         genderButtonGroup.add(wanitaRadioButton);
         genderButtonGroup.add(priaRadioButton);
         golonganButtonGroup.add(BPJSRadioButton);
         golonganButtonGroup.add(nonBPJSRadioButton);
+        goldarButtonGroup.add(golDarA);
+        goldarButtonGroup.add(golDarB);
+        goldarButtonGroup.add(golDarAB);
+        goldarButtonGroup.add(golDarO);
+        rhesusButtonGroup.add(rhesusMin);
+        rhesusButtonGroup.add(rhesusPlus);
         insertNewPatient = new JButton("Tambahkan Pasien Baru");
+        panelContent = new JPanel();
+        panelMenu = new JPanel();
+        panelWithScroll = new JPanel();
+        CVP = new ControllerViewPasien();
+        gbc = new GridBagConstraints();
+        gbl = new GridBagLayout();
+        panelWithScroll.setLayout(gbl);
+        panelScroll = new JScrollPane(){
+            @Override
+            public Dimension getPreferredSize() {
+                return new Dimension(600, 500);
+            };
+        };
+        panelScroll.setViewportView(panelWithScroll);
         
-        //label
-        NIKLabel.setBounds(10, 10, 100, 45);
-        namaLabel.setBounds(10, 50, 100, 45);
-        alergiLabel.setBounds(10, 90, 100, 45);
-        goldarLabel.setBounds(10, 130, 100, 45);
-        penyakitMenurunLabel.setBounds(10, 170, 125, 45);
-        tglLahirLabel.setBounds(10, 210, 100, 45);
-        alamatLabel.setBounds(10, 250, 100, 45);
-        noKontakLabel.setBounds(10, 290, 100, 45);
-        golonganLabel.setBounds(10, 330, 100, 45);
-        genderLabel.setBounds(10, 370, 125, 45);
-        //field
-        NIKTextField.setBounds(135, 17, 200, 25);
-        namaTextField.setBounds(135, 57, 200, 25);
-        alergiTextField.setBounds(135, 97, 200, 25);
-        goldarTextField.setBounds(135, 137, 150, 25);
-        penyakitMenurunTextField.setBounds(135, 177, 200, 25);
-        tglLahir.setBounds(135, 217, 150, 25);
-        alamatTextField.setBounds(135, 257, 200, 25);
-        noKontakTextField.setBounds(135, 297, 200, 25);
-        //button
-        BPJSRadioButton.setBounds(10, 360, 100, 25);
-        nonBPJSRadioButton.setBounds(110, 360, 100, 25);
-        wanitaRadioButton.setBounds(10, 400, 100, 25);
-        priaRadioButton.setBounds(110, 400, 100, 25);
-        insertNewPatient.setBounds(10, 470, 200, 25);
+        CVP.setGBC(gbc, 0.5, 0.5, 1, 1, GridBagConstraints.FIRST_LINE_START,GridBagConstraints.HORIZONTAL);
+        panelWithScroll.add(NIKLabel,gbc);
+        CVP.setGBC(gbc, 0.5, 0.5, 2, 1, GridBagConstraints.PAGE_START);
+        panelWithScroll.add(NIKTextField,gbc);
+        CVP.setGBC(gbc, 0.5, 0.5, 1, 2, GridBagConstraints.FIRST_LINE_START,GridBagConstraints.HORIZONTAL);
+        panelWithScroll.add(namaLabel,gbc);
+        CVP.setGBC(gbc, 0.5, 0.5, 2, 2, GridBagConstraints.PAGE_START);
+        panelWithScroll.add(namaTextField,gbc);
+        CVP.setGBC(gbc, 0.5, 0.5, 1, 3, GridBagConstraints.FIRST_LINE_START,GridBagConstraints.HORIZONTAL);
+        panelWithScroll.add(alergiLabel,gbc);
+        CVP.setGBC(gbc, 0.5, 0.5, 2, 3, GridBagConstraints.PAGE_START);
+        panelWithScroll.add(alergiTextField,gbc);
+        CVP.setGBC(gbc, 0.5, 0.5, 1, 4, GridBagConstraints.FIRST_LINE_START,GridBagConstraints.HORIZONTAL);
+        panelWithScroll.add(goldarLabel,gbc);
+        CVP.setGBC(gbc, 0.5, 0.5, 1, 5, GridBagConstraints.LINE_START);
+        panelWithScroll.add(golDarA,gbc);
+        CVP.setGBC(gbc, 0.5, 0.5, 2, 5, GridBagConstraints.LINE_START);
+        panelWithScroll.add(golDarB,gbc);
+        CVP.setGBC(gbc, 0.5, 0.5, 3, 5, GridBagConstraints.LINE_START);
+        panelWithScroll.add(golDarAB,gbc);
+        CVP.setGBC(gbc, 0.5, 0.5, 1, 6, GridBagConstraints.LINE_START);
+        panelWithScroll.add(golDarO,gbc);
+        CVP.setGBC(gbc, 0.5, 0.5, 1, 7, GridBagConstraints.FIRST_LINE_START,GridBagConstraints.HORIZONTAL);
+        panelWithScroll.add(rhesusLabel,gbc);
+        CVP.setGBC(gbc, 0.5, 0.5, 1, 8, GridBagConstraints.LINE_START);
+        panelWithScroll.add(rhesusMin,gbc);
+        CVP.setGBC(gbc, 0.5, 0.5, 2, 8, GridBagConstraints.LINE_START);
+        panelWithScroll.add(rhesusPlus,gbc);
+        CVP.setGBC(gbc, 0.5, 0.5, 1, 9, GridBagConstraints.FIRST_LINE_START,GridBagConstraints.HORIZONTAL);
+        panelWithScroll.add(penyakitMenurunLabel,gbc);
+        CVP.setGBC(gbc, 0.5, 0.5, 2, 9, GridBagConstraints.PAGE_START);
+        panelWithScroll.add(penyakitMenurunTextField,gbc);
+        CVP.setGBC(gbc, 0.5, 0.5, 1, 10, GridBagConstraints.FIRST_LINE_START,GridBagConstraints.HORIZONTAL);
+        panelWithScroll.add(golonganLabel,gbc);
+        CVP.setGBC(gbc, 0.5, 0.5, 1, 11, GridBagConstraints.LINE_START);
+        panelWithScroll.add(BPJSRadioButton,gbc);
+        CVP.setGBC(gbc, 0.5, 0.5, 2, 11, GridBagConstraints.LINE_START);
+        panelWithScroll.add(nonBPJSRadioButton,gbc);
+        CVP.setGBC(gbc, 0.5, 0.5, 1, 12, GridBagConstraints.FIRST_LINE_START,GridBagConstraints.HORIZONTAL);
+        panelWithScroll.add(tglLahirLabel,gbc);
+        CVP.setGBC(gbc, 0.5, 0.5, 2, 12, GridBagConstraints.PAGE_START);
+        panelWithScroll.add(tglLahir,gbc);
+        CVP.setGBC(gbc, 0.5, 0.5, 1, 13, GridBagConstraints.FIRST_LINE_START,GridBagConstraints.HORIZONTAL);
+        panelWithScroll.add(alamatLabel,gbc);
+        CVP.setGBC(gbc, 0.5, 0.5, 2, 13, GridBagConstraints.PAGE_START);
+        panelWithScroll.add(alamatTextField,gbc);
+        CVP.setGBC(gbc, 0.5, 0.5, 1, 14, GridBagConstraints.FIRST_LINE_START,GridBagConstraints.HORIZONTAL);
+        panelWithScroll.add(noKontakLabel,gbc);
+        CVP.setGBC(gbc, 0.5, 0.5, 2, 14, GridBagConstraints.PAGE_START);
+        panelWithScroll.add(noKontakTextField,gbc);
+        CVP.setGBC(gbc, 0.5, 0.5, 1, 15, GridBagConstraints.FIRST_LINE_START,GridBagConstraints.HORIZONTAL);
+        panelWithScroll.add(genderLabel,gbc);  
+        CVP.setGBC(gbc, 0.5, 0.5, 1, 16, GridBagConstraints.LINE_START);
+        panelWithScroll.add(wanitaRadioButton,gbc);
+        CVP.setGBC(gbc, 0.5, 0.5, 2, 16, GridBagConstraints.LINE_START);
+        panelWithScroll.add(priaRadioButton,gbc);
+        CVP.setGBC(gbc, 0.5, 0.5, 1, 17, GridBagConstraints.FIRST_LINE_START,GridBagConstraints.HORIZONTAL);
+        panelWithScroll.add(insertNewPatient,gbc);
         
-        viewInsertNewPatient.add(NIKLabel);
-        viewInsertNewPatient.add(namaLabel);
-        viewInsertNewPatient.add(alergiLabel);
-        viewInsertNewPatient.add(goldarLabel);
-        viewInsertNewPatient.add(penyakitMenurunLabel);
-        viewInsertNewPatient.add(golonganLabel);
-        viewInsertNewPatient.add(tglLahirLabel);
-        viewInsertNewPatient.add(alamatLabel);
-        viewInsertNewPatient.add(noKontakLabel);
-        viewInsertNewPatient.add(genderLabel);
+        panelContent.add(panelScroll,gbc);
         
-        viewInsertNewPatient.add(wanitaRadioButton);
-        viewInsertNewPatient.add(priaRadioButton);
-        viewInsertNewPatient.add(BPJSRadioButton);
-        viewInsertNewPatient.add(nonBPJSRadioButton);
-        viewInsertNewPatient.add(NIKTextField);
-        viewInsertNewPatient.add(namaTextField);
-        viewInsertNewPatient.add(alergiTextField);
-        viewInsertNewPatient.add(goldarTextField);
-        viewInsertNewPatient.add(penyakitMenurunTextField);
-        viewInsertNewPatient.add(alamatTextField);
-        viewInsertNewPatient.add(noKontakTextField);
-        viewInsertNewPatient.add(tglLahir);
-        
-        viewInsertNewPatient.add(insertNewPatient);
-        
-        viewInsertNewPatient.setSize(400,700);
-        viewInsertNewPatient.setLayout(null);
+        viewInsertNewPatient.setContentPane(panelContent);
+        viewInsertNewPatient.pack();
+        viewInsertNewPatient.setLocationByPlatform(true);
         viewInsertNewPatient.setVisible(true);
+        viewInsertNewPatient.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        
         
         insertNewPatient.addActionListener(new ActionListener() {
             @Override
@@ -150,7 +204,7 @@ public class ViewInsertPasienBaru implements InterfaceGolongan{
                 pt.setAlamat(alamatTextField.getText());
                 pt.setPenyakitMenurun(penyakitMenurunTextField.getText());
                 pt.setAlergi(alergiTextField.getText());
-                pt.setGolDar(goldarTextField.getText());
+//                pt.setGolDar(goldarTextField.getText());
                 pt.setTglLahir((Date)tglLahir.getModel().getValue());
                 pt.setTelepon(noKontakTextField.getText());
                 String gender = "";
@@ -164,6 +218,22 @@ public class ViewInsertPasienBaru implements InterfaceGolongan{
                 }else if(nonBPJSRadioButton.isSelected()){
                     pt.setBPJS(NON_BPJS);
                 }
+                String golDar = "";
+                if(rhesusMin.isSelected()){
+                    golDar = "-";
+                }else{
+                    golDar = "+";
+                }
+                if(golDarA.isSelected()){
+                    golDar += "A";
+                }else if(golDarB.isSelected()){
+                    golDar += "B";
+                }else if(golDarAB.isSelected()){
+                    golDar += "AB";
+                }else{
+                    golDar += "O";
+                }
+                pt.setGolDar(golDar);
                 pt.setGender(gender);
                 pt.setListRiwayatPasien(new ArrayList<>());
                 
