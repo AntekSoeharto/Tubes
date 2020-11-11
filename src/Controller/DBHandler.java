@@ -10,8 +10,8 @@ package Controller;
  * @author hp
  */
 
-import model.*;
-import view.*;
+import Model.*;
+import View.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.TimeZone;
