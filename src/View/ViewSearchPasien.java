@@ -13,6 +13,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
@@ -34,7 +36,7 @@ public class ViewSearchPasien {
     public ViewSearchPasien(){
         namaSearchLabel = new JLabel("Nama Pasien");
         tglLahirLabel = new JLabel("Tanggal Lahir Pasien");
-        golonganPasienLabel = new JLabel("Golongan Pasien(Tulis dengan Huruf Kapital Semua)");
+        golonganPasienLabel = new JLabel("Golongan Pasien");
         UtilDateModel model = new UtilDateModel();
         Properties p = new Properties();
         p.put("text.today", "Today");
@@ -46,12 +48,12 @@ public class ViewSearchPasien {
         golonganPasienTextField = new JTextField();
         buttonSearch = new JButton("Cari Pasien");
         
-        namaSearchLabel.setBounds(0, 0, 0, 0);
-        tglLahirLabel.setBounds(0, 0, 0, 0);
-        golonganPasienLabel.setBounds(0, 0, 0, 0);
-        tglLahir.setBounds(0, 0, 0, 0);
-        namaSearchTextField.setBounds(0, 0, 0, 0);
-        golonganPasienTextField.setBounds(0, 0, 0, 0);
+        namaSearchLabel.setBounds(10, 10, 120, 25);
+        tglLahirLabel.setBounds(10, 40, 120, 25);
+        golonganPasienLabel.setBounds(10, 70, 120, 25);
+        tglLahir.setBounds(130, 40, 120, 25);
+        namaSearchTextField.setBounds(130, 10, 120, 25);
+        golonganPasienTextField.setBounds(130, 70, 120, 25);
         
         viewSearchPasien.add(tglLahir);
         viewSearchPasien.add(namaSearchLabel);
@@ -64,7 +66,7 @@ public class ViewSearchPasien {
         viewSearchPasien.setSize(400,500);
         viewSearchPasien.setLayout(null);
         viewSearchPasien.setVisible(true);
-        
+        viewSearchPasien.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         buttonSearch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
