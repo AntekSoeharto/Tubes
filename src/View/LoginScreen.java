@@ -20,6 +20,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Properties;
+import Controller.*;
 
 
 public class LoginScreen implements ActionListener{
@@ -29,6 +30,8 @@ public class LoginScreen implements ActionListener{
     JTextField textusername = new JTextField();
     JTextField textpassword = new JTextField();
     JButton login = new JButton("LOGIN");
+    ControllerStaff control = new ControllerStaff();
+    
     
     
     
@@ -62,9 +65,15 @@ public class LoginScreen implements ActionListener{
     public void actionPerformed(ActionEvent ae){
         String command = ae.getActionCommand();
         if(command == "LOGIN"){
-            Staff staff = new Staff("intan", "intan", "01");
-            Singleton.getInstance().setStaff(staff);
-            new MainMenu();
+            Staff staff = control.getStaff(textusername.getText());
+            if(textusername.getText().equals(staff.getUsername())){
+                if(textpassword.getText().equals(staff.getPassword())){
+                    Singleton.getInstance().setStaff(staff);
+                    new MainMenu();
+                    frame.setVisible(false);
+                }
+            }
+            
             if(textusername.getText().equals("") || textpassword.getText().equals("")){
                 JOptionPane.showMessageDialog(null,"Username Atau Password Harus Di isi");
             }else{  
