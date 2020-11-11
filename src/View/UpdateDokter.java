@@ -230,7 +230,11 @@ public class UpdateDokter implements ActionListener{
                 
                 Date lahir = (Date)datePicker.getModel().getValue();
                 Dokter dokter = new Dokter(strnid, strpoli, strnama, strnik, lahir, strgoldar, strgender, stralamat, strnotelp);
-                boolean input = control.updateDokter(dokter);
+                boolean update = control.updateDokter(dokter);
+                if(update == true){
+                    frame.setVisible(false);
+                    new MenuDokter();
+                }
                 
                 
                 //pt.setTglLahir((Date)tglLahir.getModel().getValue());
