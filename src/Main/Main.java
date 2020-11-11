@@ -8,7 +8,7 @@ import Model.*;
 import java.util.ArrayList;
 import java.util.Date;
 import Controller.ControllerStaff;
-import View.LoginScreen;
+import View.*;
 /**
  *
  * @author hp
