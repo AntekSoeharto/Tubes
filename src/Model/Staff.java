@@ -20,7 +20,9 @@ public class Staff{
         this.idCabang = idCabang;
     }
     
-    
+    public Staff(){
+        
+    }
     
     
     public String getUsername() {

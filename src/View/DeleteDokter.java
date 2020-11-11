@@ -101,8 +101,12 @@ public class DeleteDokter implements ActionListener{
             case "DELETE":
                 String strnid = nid.getText();
                 boolean delete = control.deleteDokter(strnid);
-                new MenuDokter();
                 frame.setVisible(false);
+                if(delete == true){
+                    frame.setVisible(false);
+                    JOptionPane.showMessageDialog(null,"Data Sudah Di Tambah");
+                    new MenuDokter();
+                }
                 break;
             default: 
                 break;

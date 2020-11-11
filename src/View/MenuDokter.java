@@ -100,7 +100,5 @@ public class MenuDokter implements ActionListener{
                 break;
         }
     }
-    public static void main(String[] args){
-        new MenuDokter();
-    }
+
 }
