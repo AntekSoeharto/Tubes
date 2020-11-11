@@ -9,7 +9,7 @@ package View;
  *
  * @author hp
  */
-
+import Model.*;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -54,18 +54,20 @@ public class LoginScreen implements ActionListener{
         frame.setVisible(true);
         
         
+        
     }
     
     
-
-    
     @Override
-    public void actionPerformed(ActionEvent ae) {
+    public void actionPerformed(ActionEvent ae){
         String command = ae.getActionCommand();
         if(command == "LOGIN"){
+            Staff staff = new Staff("intan", "intan", "01");
+            Singleton.getInstance().setStaff(staff);
+            new MainMenu();
             if(textusername.getText().equals("") || textpassword.getText().equals("")){
                 JOptionPane.showMessageDialog(null,"Username Atau Password Harus Di isi");
-            }else{
+            }else{  
                 new MainMenu();
                 frame.setVisible(false);
             }

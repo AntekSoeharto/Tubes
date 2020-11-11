@@ -26,7 +26,7 @@ public class Dokter extends User{
         this.Gaji = Gaji;
     }
 
-    public Dokter(String NID, String Poliklinik, double Gaji, String Nama, String NIK, Date tglLahir, String golDar, String gender, String Alamat, String Telepon) {
+    public Dokter(String NID, String Poliklinik, String Nama, String NIK, Date tglLahir, String golDar, String gender, String Alamat, String Telepon) {
         super(Nama, NIK, tglLahir, golDar, gender, Alamat, Telepon);
         this.NID = NID;
         this.Poliklinik = Poliklinik;
