@@ -227,11 +227,12 @@ public class InputDokter implements ActionListener{
                 Date lahir = (Date)datePicker.getModel().getValue();
                 Dokter dokter = new Dokter(strnid, strpoli, strnama, strnik, lahir, strgoldar, strgender, stralamat, strnotelp);
                 boolean input = control.addDokter(dokter);
-                
-                
-                //pt.setTglLahir((Date)tglLahir.getModel().getValue());
-                
-                
+                if(input == true){
+                    frame.setVisible(false);
+                    JOptionPane.showMessageDialog(null,"Data Sudah Di Tambah");
+                    new MenuDokter();
+                    frame.setVisible(false);
+                }                
             default: 
                 break;
         }
