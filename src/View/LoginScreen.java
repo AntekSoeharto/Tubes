@@ -28,7 +28,7 @@ public class LoginScreen implements ActionListener{
     JLabel labusername = new JLabel("Username");
     JLabel labpassword = new JLabel("Password");
     JTextField textusername = new JTextField();
-    JTextField textpassword = new JTextField();
+    JPasswordField textpassword = new JPasswordField();
     JButton login = new JButton("LOGIN");
     ControllerStaff control = new ControllerStaff();
     
@@ -71,14 +71,15 @@ public class LoginScreen implements ActionListener{
                     Singleton.getInstance().setStaff(staff);
                     new MainMenu();
                     frame.setVisible(false);
+                }else{
+                    JOptionPane.showMessageDialog(null,"Username Atau Password Salah");
                 }
+            }else{
+                JOptionPane.showMessageDialog(null,"Username Atau Password Salah");
             }
             
             if(textusername.getText().equals("") || textpassword.getText().equals("")){
                 JOptionPane.showMessageDialog(null,"Username Atau Password Harus Di isi");
-            }else{  
-                new MainMenu();
-                frame.setVisible(false);
             }
         }
         
