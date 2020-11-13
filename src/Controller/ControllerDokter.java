@@ -23,7 +23,30 @@ public class ControllerDokter {
     static DBHandler conn = new DBHandler();
     
     
-    
+    public static ArrayList<Dokter> getAllDokter(){
+        conn.connect();
+        ArrayList<Dokter> dokters = new ArrayList<Dokter>();
+        Dokter dokter = new Dokter();
+        String query = "SELECT * FROM dokter WHERE ID_cabang='" + Singleton.getInstance().getStaff().getIdCabang() + "'";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                dokter.setNIK(rs.getString("NIK"));
+                dokter.setNama(rs.getString("Nama"));
+                dokter.setTglLahir((Date)rs.getObject("Tgl_lahir"));
+                dokter.setGolDar(rs.getString("Goldar"));
+                dokter.setGender(rs.getString("Gender"));
+                dokter.setNID(rs.getString("NID"));
+                dokter.setPoliklinik(rs.getString("Poliklinik"));
+                dokter.setTelepon(rs.getString("No_Telepon"));
+                dokter.setAlamat(rs.getString("Alamat"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dokters;
+    }
     public static Dokter getDokter(String nid){
         conn.connect();
         Dokter dokter = new Dokter();
@@ -74,20 +97,20 @@ public class ControllerDokter {
     
     public static boolean updateDokter(Dokter dokter){
         conn.connect();
-        String query = "UPDATE dokter SET NIK='" + dokter.getNIK() + "', "
-                + "Nama='" + dokter.getNama() + "', "
-                + "Tgl_Lahir='" + dokter.getTglLahir() + "', "
-                + "Goldar='" + dokter.getGolDar()+ "', "
-                + "Gender='" + dokter.getGender() + "', "
-                + "NID='" + dokter.getNID() + "', "
-                + "Poliklinik='" + dokter.getPoliklinik() + "', "
-                + "No_Telepon='" + dokter.getTelepon() + "', "
-                + "Alamat='" + dokter.getAlamat() + "', "
-                + "ID_Cabang='" + Singleton.getInstance().getStaff().getIdCabang() + "', "
-                + "WHERE NID='" + dokter.getNID() + "'";
+        String query = "Update INTO dokter VALUES(?,?,?,?,?,?,?,?,?,?) WHERE nik = '" + dokter.getNIK() + "'";
         try {
-            Statement stmt = conn.con.createStatement();
-            stmt.executeUpdate(query);
+            PreparedStatement stmt = conn.con.prepareStatement(query);
+            stmt.setString(1, dokter.getNIK());
+            stmt.setString(2, dokter.getNama());
+            stmt.setObject(3, dokter.getTglLahir());
+            stmt.setString(4, dokter.getGolDar());
+            stmt.setString(5, dokter.getGender());
+            stmt.setString(6, dokter.getNID());
+            stmt.setString(7, dokter.getPoliklinik());
+            stmt.setString(8, dokter.getTelepon());
+            stmt.setString(9, dokter.getAlamat());
+            stmt.setString(10, Singleton.getInstance().getStaff().getIdCabang());
+            stmt.executeUpdate();
             return (true);
         } catch (SQLException e) {
             e.printStackTrace();
