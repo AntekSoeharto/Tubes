@@ -12,8 +12,6 @@ public class Dokter extends User{
     private String Poliklinik;
     private double Gaji;
     private ArrayList<AbsensiDokter> Absen = new ArrayList<AbsensiDokter>();
-    private ArrayList<String> listPendidikan = new ArrayList<String>();
-    private ArrayList<String> listKarir = new ArrayList<String>();
     
     
     public Dokter(){   
@@ -54,9 +52,10 @@ public class Dokter extends User{
         return Absen;
     }
 
-    public void setAbsen(ArrayList<AbsensiDokter>absensiDokters ,AbsensiDokter absenDokter) {
-        absensiDokters.add(absenDokter);
+    public void setAbsen(ArrayList<AbsensiDokter> Absen) {
+        this.Absen = Absen;
     }
+  
     
     public String getPoliklinik() {
         return Poliklinik;
