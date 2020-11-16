@@ -100,7 +100,6 @@ public class PreUpdateDokter implements ActionListener{
                 break;
             case "UPDATE":
                 Dokter dokter = control.getDokter(nid.getText());
-                System.out.println("Berhasil");
                 new UpdateDokter(dokter);
                 frame.setVisible(false);
                 break;
