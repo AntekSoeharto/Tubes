@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 
 public class InputDokter implements ActionListener{
     private ControllerDokter control = new ControllerDokter();
-    JFrame frame = new JFrame("MenuDokter");
+    JFrame frame = new JFrame("Input Dokter");
     JPanel menu = new JPanel();
     JPanel isi = new JPanel();
     

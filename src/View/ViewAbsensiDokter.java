@@ -10,8 +10,8 @@ package View;
  * @author hp
  */
 
+import Controller.ControllerDokter;
 import Model.*;
-import Controller.*;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -21,26 +21,39 @@ import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Properties;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
 
-public class DeleteDokter implements ActionListener{
-    ControllerDokter control = new ControllerDokter();
+public class ViewAbsensiDokter implements ActionListener{
     
-    JFrame frame = new JFrame("Delete Dokter");
+    JFrame frame = new JFrame("Absensi Dokter");
     JPanel menu = new JPanel();
     JPanel isi = new JPanel();
+    JLabel labNid = new JLabel("NID");
+    JLabel labTanggal = new JLabel("Tanggal");
+    JLabel labStatus = new JLabel("Status");
+    JTextField textNid = new JTextField();
+    
+    
     
     JButton menu_pasien = new JButton("PASIEN");
     JButton menu_dokter = new JButton("DOKTER");
     JButton menu_admin = new JButton("ADMINISTRASI");
+    JButton submit = new JButton("SUBMIT");
+    UtilDateModel model = new UtilDateModel();
+    Properties p = new Properties();
+    JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
+    JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+    String[] listStatus = {"HADIR", "ALPHA", "IZIN"};
+    JComboBox Status = new JComboBox(listStatus);
+    private ControllerDokter control = new ControllerDokter();
     
-    JTextField nid = new JTextField();
-    JLabel nids = new JLabel("NID");
-    JLabel alert1 = new JLabel("MASUKAN NID TERLEBIH DAHULU ");
-    JButton update = new JButton("DELETE");
     
     
-    public DeleteDokter(){
+    public ViewAbsensiDokter(){
         
         frame.setSize(1200, 700);
         frame.setLocationRelativeTo(null);
@@ -60,20 +73,30 @@ public class DeleteDokter implements ActionListener{
         menu_dokter.addActionListener(this);
         menu_pasien.addActionListener(this);
         menu_admin.addActionListener(this);
-        update.addActionListener(this);
         
-        alert1.setBounds(290, 200, 200, 50);
-        nids.setBounds(290, 260, 100, 20);
-        nid.setBounds(400, 260, 100, 20);
-        update.setBounds(350,300,120,50);
+        labNid.setBounds(290, 230, 100, 20);
+        labTanggal.setBounds(290, 260, 100, 20);
+        labStatus.setBounds(290, 290, 100, 20);
+        textNid.setBounds(400, 230, 100, 20);
         
+        p.put("text.today", "Today");
+        p.put("text.month", "Month");
+        p.put("text.year", "Year");
+        datePicker.setBounds(400, 260, 100, 20);
         
+        Status.setBounds(400, 290, 100, 20);
         
+        submit.addActionListener(this);
+        submit.setBounds(350, 350, 150, 50);
         
-        isi.add(update);
-        isi.add(nids);
-        isi.add(nid);
-        isi.add(alert1);
+        isi.add(labNid);
+        isi.add(textNid);
+        isi.add(labTanggal);
+        isi.add(datePicker);
+        isi.add(labStatus);
+        isi.add(Status);
+        isi.add(submit);
+        
         
         
         frame.add(isi);
@@ -97,17 +120,17 @@ public class DeleteDokter implements ActionListener{
             case "ADMINISTRASI":
                 new MenuAdmin();
                 frame.setVisible(false);
-                break;
-            case "DELETE":
-                String strnid = nid.getText();
-                boolean delete = control.deleteDokter(strnid);
+                break; 
+            case "SUBMIT":
+                String strnid = textNid.getText();
+                String strtanggal = model.getDay() + "-" + model.getMonth() + "-" + model.getYear();
+                String strstatus = String.valueOf(Status.getSelectedItem());
+                Date tanggal = (Date)datePicker.getModel().getValue();
+                boolean absen = control.addAbsen(strnid, tanggal, strstatus);
                 frame.setVisible(false);
-                if(delete == true){
-                    frame.setVisible(false);
-                    JOptionPane.showMessageDialog(null,"Data Sudah Di Hapus");
-                    new MenuDokter();
-                }
-                break;
+                JOptionPane.showMessageDialog(null,"Absen Dengan NID " + strnid + ", Telah Diisi");
+                new MenuDokter();
+                
             default: 
                 break;
         }
