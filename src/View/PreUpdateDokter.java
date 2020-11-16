@@ -26,7 +26,7 @@ import java.util.Properties;
 public class PreUpdateDokter implements ActionListener{
     ControllerDokter control = new ControllerDokter();
     
-    JFrame frame = new JFrame("MainMenu");
+    JFrame frame = new JFrame("Pre Update Dokter");
     JPanel menu = new JPanel();
     JPanel isi = new JPanel();
     
@@ -35,7 +35,7 @@ public class PreUpdateDokter implements ActionListener{
     JButton menu_admin = new JButton("ADMINISTRASI");
     
     JTextField nid = new JTextField();
-    JLabel nids = new JLabel("NID");
+    JLabel nids = new JLabel("NIK");
     JLabel alert1 = new JLabel("MASUKAN NID TERLEBIH DAHULU ");
     JButton update = new JButton("UPDATE");
     
@@ -100,7 +100,7 @@ public class PreUpdateDokter implements ActionListener{
                 break;
             case "UPDATE":
                 Dokter dokter = control.getDokter(nid.getText());
-                System.out.println("d");
+                System.out.println("Berhasil");
                 new UpdateDokter(dokter);
                 frame.setVisible(false);
                 break;
@@ -109,5 +109,7 @@ public class PreUpdateDokter implements ActionListener{
         }
     }
     
-
+public static void main(String[] args){
+        new PreUpdateDokter();
+    }
 }
