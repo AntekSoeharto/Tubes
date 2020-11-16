@@ -100,7 +100,6 @@ public class PreHitungGaji implements ActionListener{
                 break;
             case "HITUNG":
                 Dokter dokter = control.getDokter(nid.getText());
-                System.out.println("Berhasil");
                 new HitungGaji(dokter);
                 frame.setVisible(false);
                 break;
