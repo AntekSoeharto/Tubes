@@ -5,7 +5,7 @@
  */
 package Controller;
 
-import Model.Dokter;
+import Model.*;
 import Model.Singleton;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,12 +26,12 @@ public class ControllerDokter {
     public static ArrayList<Dokter> getAllDokter(){
         conn.connect();
         ArrayList<Dokter> dokters = new ArrayList<Dokter>();
-        Dokter dokter = new Dokter();
         String query = "SELECT * FROM dokter WHERE ID_cabang='" + Singleton.getInstance().getStaff().getIdCabang() + "'";
         try {
             Statement stmt = conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
+                Dokter dokter = new Dokter();
                 dokter.setNIK(rs.getString("NIK"));
                 dokter.setNama(rs.getString("Nama"));
                 dokter.setTglLahir((Date)rs.getObject("Tgl_lahir"));
@@ -40,7 +40,9 @@ public class ControllerDokter {
                 dokter.setNID(rs.getString("NID"));
                 dokter.setPoliklinik(rs.getString("Poliklinik"));
                 dokter.setTelepon(rs.getString("No_Telepon"));
+                dokter.setAbsen(getAllAbsen(rs.getString("NID")));
                 dokter.setAlamat(rs.getString("Alamat"));
+                dokters.add(dokter);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -63,6 +65,7 @@ public class ControllerDokter {
                 dokter.setNID(rs.getString("NID"));
                 dokter.setPoliklinik(rs.getString("Poliklinik"));
                 dokter.setTelepon(rs.getString("No_Telepon"));
+                dokter.setAbsen(getAllAbsen(rs.getString("NID")));
                 dokter.setAlamat(rs.getString("Alamat"));
             }
         } catch (SQLException e) {
@@ -132,4 +135,46 @@ public class ControllerDokter {
         }
     }
     
+    public static boolean addAbsen(String nid, Date tanggal, String status){
+        conn.connect();
+        String query = "INSERT INTO absensi_dokter VALUES(?,?,?)";
+        try {
+            PreparedStatement stmt = conn.con.prepareStatement(query);
+            stmt.setObject(1, tanggal);
+            stmt.setObject(2, status);
+            stmt.setObject(3, nid);
+            stmt.executeUpdate();
+            return (true);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return (false);
+        }        
+    }
+    
+    public static ArrayList<AbsensiDokter> getAllAbsen(String nid){
+        conn.connect();
+        ArrayList<AbsensiDokter> absen = new ArrayList<AbsensiDokter>();
+        String query = "SELECT * FROM absensi_dokter WHERE NID='" + nid + "'";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                Date tanggal = (Date)rs.getObject("Tgl_absen");
+                if(rs.getString("Status").equals("ALPHA")){
+                    AbsensiDokter absens = new AbsensiDokter(tanggal, StatusAbsensi.ALPHA);
+                    absen.add(absens);
+                }else if(rs.getString("Status").equals("HADIR")){
+                    AbsensiDokter absens = new AbsensiDokter(tanggal, StatusAbsensi.MASUK);
+                    absen.add(absens);
+                }else{
+                    AbsensiDokter absens = new AbsensiDokter(tanggal, StatusAbsensi.IZIN);
+                    absen.add(absens);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return absen;
+        
+    }
 }
