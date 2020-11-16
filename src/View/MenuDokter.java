@@ -97,6 +97,10 @@ public class MenuDokter implements ActionListener{
                 new DeleteDokter();
                 frame.setVisible(false);
                 break;
+            case "ABSENSI DOKTER":
+                new ViewAbsensiDokter();
+                frame.setVisible(false);
+                break;
             default: 
                 break;
         }
