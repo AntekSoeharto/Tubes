@@ -104,7 +104,7 @@ public class DeleteDokter implements ActionListener{
                 frame.setVisible(false);
                 if(delete == true){
                     frame.setVisible(false);
-                    JOptionPane.showMessageDialog(null,"Data Sudah Di Tambah");
+                    JOptionPane.showMessageDialog(null,"Data Sudah Di Hapus");
                     new MenuDokter();
                 }
                 break;
