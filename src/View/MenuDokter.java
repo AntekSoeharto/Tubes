@@ -16,6 +16,7 @@ import javax.swing.JPanel;
  *
  * @author hp
  */
+
 public class MenuDokter implements ActionListener{
     JFrame frame = new JFrame("MenuDokter");
     JPanel menu = new JPanel();
@@ -100,5 +101,4 @@ public class MenuDokter implements ActionListener{
                 break;
         }
     }
-
 }
