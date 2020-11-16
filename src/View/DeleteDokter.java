@@ -26,7 +26,7 @@ import java.util.Properties;
 public class DeleteDokter implements ActionListener{
     ControllerDokter control = new ControllerDokter();
     
-    JFrame frame = new JFrame("MainMenu");
+    JFrame frame = new JFrame("Delete Dokter");
     JPanel menu = new JPanel();
     JPanel isi = new JPanel();
     
