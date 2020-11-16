@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 
 public class UpdateDokter implements ActionListener{
     private ControllerDokter control = new ControllerDokter();
-    JFrame frame = new JFrame("MenuDokter");
+    JFrame frame = new JFrame("Update Dokter");
     JPanel menu = new JPanel();
     JPanel isi = new JPanel();
     
@@ -230,14 +230,13 @@ public class UpdateDokter implements ActionListener{
                 
                 Date lahir = (Date)datePicker.getModel().getValue();
                 Dokter dokter = new Dokter(strnid, strpoli, strnama, strnik, lahir, strgoldar, strgender, stralamat, strnotelp);
+                JOptionPane.showMessageDialog(null,"sudah disini" + dokter.getNIK());
                 boolean update = control.updateDokter(dokter);
                 if(update == true){
                     frame.setVisible(false);
                     new MenuDokter();
                 }
                 
-                
-                //pt.setTglLahir((Date)tglLahir.getModel().getValue());
                 
                 
             default: 
