@@ -5,13 +5,16 @@
  */
 package View;
 
+import Controller.ControllerPasien;
 import Model.DateLabelFormatter;
+import Model.Pasien;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Properties;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
@@ -25,42 +28,34 @@ import org.jdatepicker.impl.UtilDateModel;
  */
 public class ViewSearchPasien {
     JFrame viewSearchPasien = new JFrame("Search Pasien");
-    JLabel namaSearchLabel,
-            tglLahirLabel,
-            golonganPasienLabel;
-    JTextField namaSearchTextField,golonganPasienTextField;
-    JButton buttonSearch;
-    JDatePickerImpl tglLahir;
-    JDatePanelImpl datePanel;
+    JLabel NIKOutputLabel,namaLabel,tglLahirLabel,golonganPasienLabel,
+            alamatLabel,noKontakLabel,genderLabel,alergiLabel,goldarLabel,
+            penyakitMenurunLabel,NIKInputLabel;
+    JTextField NIKInputTextField;
+    JButton buttonSearch,buttonUpdate;
     
     public ViewSearchPasien(){
-        namaSearchLabel = new JLabel("Nama Pasien");
-        tglLahirLabel = new JLabel("Tanggal Lahir Pasien");
-        golonganPasienLabel = new JLabel("Golongan Pasien");
-        UtilDateModel model = new UtilDateModel();
-        Properties p = new Properties();
-        p.put("text.today", "Today");
-        p.put("text.month", "Month");
-        p.put("text.year", "Year");
-        datePanel = new JDatePanelImpl(model, p);
-        tglLahir = new JDatePickerImpl(datePanel,new DateLabelFormatter());
-        namaSearchTextField = new JTextField();
-        golonganPasienTextField = new JTextField();
+        NIKInputLabel = new JLabel("masukkan NIK pasien");
+        NIKOutputLabel = new JLabel();
+        namaLabel = new JLabel();
+        tglLahirLabel = new JLabel();
+        golonganPasienLabel = new JLabel();
+        alamatLabel = new JLabel();
+        noKontakLabel = new JLabel();
+        genderLabel = new JLabel();
+        alergiLabel = new JLabel();
+        goldarLabel = new JLabel();
+        NIKInputTextField = new JTextField();
         buttonSearch = new JButton("Cari Pasien");
+        buttonUpdate = new JButton("Ubah Data Pasien");
         
-        namaSearchLabel.setBounds(10, 10, 120, 25);
+        namaLabel.setBounds(10, 10, 120, 25);
         tglLahirLabel.setBounds(10, 40, 120, 25);
         golonganPasienLabel.setBounds(10, 70, 120, 25);
-        tglLahir.setBounds(130, 40, 120, 25);
-        namaSearchTextField.setBounds(130, 10, 120, 25);
-        golonganPasienTextField.setBounds(130, 70, 120, 25);
         
-        viewSearchPasien.add(tglLahir);
-        viewSearchPasien.add(namaSearchLabel);
+        viewSearchPasien.add(namaLabel);
         viewSearchPasien.add(tglLahirLabel);
         viewSearchPasien.add(golonganPasienLabel);
-        viewSearchPasien.add(namaSearchTextField);
-        viewSearchPasien.add(golonganPasienTextField);
         viewSearchPasien.add(buttonSearch);
         
         viewSearchPasien.setSize(400,500);
@@ -70,8 +65,28 @@ public class ViewSearchPasien {
         buttonSearch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //cek datanya ada di database atw g
-                //masuk ke viewUpdateDataPasien
+                Pasien p = ControllerPasien.getPasien(NIKInputTextField.getText());
+                if(p != null){
+                    NIKOutputLabel.setText("NIK : " + p.getNIK());
+                    namaLabel.setText("Nama : " + p.getNama());
+                    tglLahirLabel.setText("Tanggal Lahir : " + p.getTglLahir());
+                    golonganPasienLabel.setText("Golongan : " + p.getBPJS());
+                    alamatLabel.setText("alamat : " + p.getAlamat());
+                    noKontakLabel.setText("no Kontak" + p.getTelepon());
+                    genderLabel.setText("Gender : " + p.getGender());
+                    alergiLabel.setText("Alergi : " + p.getAlergi());
+                    penyakitMenurunLabel.setText("Penyakit Menurun : " + p. getPenyakitMenurun());
+                    goldarLabel.setText("Goldar : " + p.getGolDar());
+                }else{
+                    JOptionPane.showMessageDialog(null, "Data Pasien tidak ditemukan");
+                }
+            }
+        });
+        buttonUpdate.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Pasien p = ControllerPasien.getPasien(NIKInputTextField.getText());
+                new ViewUpdateDataPasien(p.getNIK());
             }
         });
     }
