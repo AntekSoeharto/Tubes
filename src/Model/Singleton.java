@@ -12,6 +12,7 @@ package Model;
 public class Singleton {
     private static Singleton instance;
     private Staff staff;
+    private Cabang cabang;
 
     public static Singleton getInstance() {
         if(instance == null){
@@ -26,6 +27,14 @@ public class Singleton {
 
     public void setStaff(Staff staff) {
         this.staff = staff;
+    }
+    
+    public Cabang getCabang(){
+        return cabang;
+    }
+    
+    public void setCabang(Cabang cabang){
+        this.cabang = cabang;
     }
     
     
