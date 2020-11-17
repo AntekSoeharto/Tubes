@@ -70,6 +70,7 @@ public class LoginScreen implements ActionListener{
                 if(textpassword.getText().equals(staff.getPassword())){
                     Singleton.getInstance().setStaff(staff);
                     new MainMenu();
+                    Singleton.getInstance().setCabang(control.getCabang(staff.getIdCabang()));
                     frame.setVisible(false);
                 }else{
                     JOptionPane.showMessageDialog(null,"Username Atau Password Salah");

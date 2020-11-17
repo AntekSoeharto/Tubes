@@ -35,4 +35,22 @@ public class ControllerStaff {
         }
         return (staff);
     }
+    
+    public static Cabang getCabang(String id){
+        conn.connect();
+        Cabang cabang = new Cabang();
+        String query = "SELECT * FROM cabang WHERE ID_cabang='" + id + "'";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                cabang.setAlamat(rs.getString("Alamat"));
+                cabang.setTelepon(rs.getString("No_telepon"));
+                cabang.setNama(rs.getString("Nama_cabang"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (null);
+    }
 }
