@@ -20,7 +20,7 @@ public class ControllerPasien {
     public ControllerPasien(){
         
     }
-    static DatabaseHandler conn = new DatabaseHandler();
+    static DBHandler conn = new DBHandler();
 
     // SELECT ALL from table pasiens
     public static ArrayList<Pasien> getAllPasiens() {
@@ -51,9 +51,9 @@ public class ControllerPasien {
     }
 
     // SELECT WHERE
-    public static Pasien getPasien(String name, String address) {
+    public static Pasien getPasien(String NIK) {
         conn.connect();
-        String query = "SELECT * FROM Pasien WHERE Name='" + name + "'&&Address='" + address + "'";
+        String query = "SELECT * FROM Pasien WHERE NIK='" + NIK + "'";
         Pasien pasien = new Pasien();
         try {
             Statement stmt = conn.con.createStatement();
@@ -102,13 +102,12 @@ public class ControllerPasien {
     }
 
     // UPDATE
-    public static boolean updatePasien(Pasien pasien) {
+    public static boolean updatePasien(String Golongan,String Alamat,String Telepon,String NIK) {
         conn.connect();
-        String query = "UPDATE Pasien SET Nama='" + pasien.getNama() + "', "
-                + "Golongan='" + pasien.getBPJS()+ "', "
-                + "Alamat='" + pasien.getAlamat()+ "', "
-                + "No_telepon='" + pasien.getTelepon()+ "' "
-                + " WHERE NIK='" + pasien.getNIK()+ "'";
+        String query = "UPDATE Pasien SET Golongan='" + Golongan + "', "
+                + "Alamat='" + Alamat+ "', "
+                + "No_telepon='" + Telepon+ "' "
+                + " WHERE NIK='" + NIK+ "'";
         try {
             Statement stmt = conn.con.createStatement();
             stmt.executeUpdate(query);
@@ -120,10 +119,10 @@ public class ControllerPasien {
     }
 
     // DELETE
-    public static boolean deletePasien(String name) {
+    public static boolean deletePasien(String NIK) {
         conn.connect();
 
-        String query = "DELETE FROM Pasien WHERE Name='" + name + "'";
+        String query = "DELETE FROM Pasien WHERE NIK='" + NIK + "'";
         try {
             Statement stmt = conn.con.createStatement();
             stmt.executeUpdate(query);
