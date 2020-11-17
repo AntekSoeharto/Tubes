@@ -27,6 +27,8 @@ public class MenuPasien implements ActionListener{
     JButton menu_admin = new JButton("ADMINISTRASI");
     JButton insertPasienBaru = new JButton("Insert Pasien Baru");
     JButton searchPasien = new JButton("cari Pasien");
+    JButton beliObat = new JButton("beli obat");
+    JButton tambahRiwayatPasien = new JButton("update riwayat pasien");
     
     public MenuPasien(){
         
@@ -44,8 +46,12 @@ public class MenuPasien implements ActionListener{
         menu_admin.setBounds(35,320,120,50);
         insertPasienBaru.setBounds(265, 10, 150, 25);
         searchPasien.setBounds(265, 50, 130, 25);
+        beliObat.setBounds(265, 90, 150, 25);
+        tambahRiwayatPasien.setBounds(265, 130, 160, 25);
         isi.add(insertPasienBaru);
         isi.add(searchPasien);
+        isi.add(beliObat);
+        isi.add(tambahRiwayatPasien);
         menu.add(menu_dokter);
         menu.add(menu_pasien);
         menu.add(menu_admin);
@@ -57,6 +63,7 @@ public class MenuPasien implements ActionListener{
         frame.add(isi);
         frame.add(menu);
         frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         insertPasienBaru.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -67,6 +74,18 @@ public class MenuPasien implements ActionListener{
             @Override
             public void actionPerformed(ActionEvent e) {
                 new ViewSearchPasien();
+            }
+        });
+        beliObat.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ViewBeliObat();
+            }
+        });
+        tambahRiwayatPasien.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new viewTambahRiwayatPasien();
             }
         });
     }
