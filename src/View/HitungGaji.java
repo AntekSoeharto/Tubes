@@ -10,8 +10,8 @@ package View;
  * @author hp
  */
 
+import Controller.ControllerDokter;
 import Model.*;
-import Controller.*;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -21,26 +21,32 @@ import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Properties;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
 
-public class PreUpdateDokter implements ActionListener{
-    ControllerDokter control = new ControllerDokter();
+public class HitungGaji implements ActionListener{
     
-    JFrame frame = new JFrame("Pre Update Dokter");
+    JFrame frame = new JFrame("Absensi Dokter");
     JPanel menu = new JPanel();
     JPanel isi = new JPanel();
+    JLabel labNid = new JLabel ("NID    :");
+    JLabel labNama = new JLabel("Nama   :");
+    JLabel labGaji = new JLabel("Gaji   :");
+    
+    
     
     JButton menu_pasien = new JButton("PASIEN");
     JButton menu_dokter = new JButton("DOKTER");
     JButton menu_admin = new JButton("ADMINISTRASI");
     
-    JTextField nid = new JTextField();
-    JLabel nids = new JLabel("NIK");
-    JLabel alert1 = new JLabel("MASUKAN NID TERLEBIH DAHULU ");
-    JButton update = new JButton("UPDATE");
+    private ControllerDokter control = new ControllerDokter();
     
     
-    public PreUpdateDokter(){
+    
+    public HitungGaji(Dokter dokter){
         
         frame.setSize(1200, 700);
         frame.setLocationRelativeTo(null);
@@ -60,20 +66,27 @@ public class PreUpdateDokter implements ActionListener{
         menu_dokter.addActionListener(this);
         menu_pasien.addActionListener(this);
         menu_admin.addActionListener(this);
-        update.addActionListener(this);
         
-        alert1.setBounds(290, 200, 200, 50);
-        nids.setBounds(290, 260, 100, 20);
+        labNid.setBounds(290, 230, 100, 20);
+        labNama.setBounds(290, 260, 100, 20);
+        labGaji.setBounds(290, 290, 100, 20);
+        //textNid.setBounds(400, 230, 100, 20);
+        JLabel nama = new JLabel(dokter.getNama());
+        JLabel nid = new JLabel(dokter.getNID());
+        JLabel gaji = new JLabel(String.valueOf(dokter.hitungGaji()));
+        nama.setBounds(400, 230, 100, 20);
         nid.setBounds(400, 260, 100, 20);
-        update.setBounds(350,300,120,50);
+        gaji.setBounds(400, 290, 100, 20);
         
-        
-        
-        
-        isi.add(update);
-        isi.add(nids);
+        isi.add(labNid);
+        isi.add(labNama);
+        isi.add(labGaji);
+        isi.add(nama);
         isi.add(nid);
-        isi.add(alert1);
+        isi.add(gaji);
+        
+        
+        
         
         
         frame.add(isi);
@@ -97,12 +110,7 @@ public class PreUpdateDokter implements ActionListener{
             case "ADMINISTRASI":
                 new MenuAdmin();
                 frame.setVisible(false);
-                break;
-            case "UPDATE":
-                Dokter dokter = control.getDokter(nid.getText());
-                new UpdateDokter(dokter);
-                frame.setVisible(false);
-                break;
+                break; 
             default: 
                 break;
         }

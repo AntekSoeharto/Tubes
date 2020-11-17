@@ -23,7 +23,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Properties;
 
-public class PreUpdateDokter implements ActionListener{
+public class PreHitungGaji implements ActionListener{
     ControllerDokter control = new ControllerDokter();
     
     JFrame frame = new JFrame("Pre Update Dokter");
@@ -35,12 +35,12 @@ public class PreUpdateDokter implements ActionListener{
     JButton menu_admin = new JButton("ADMINISTRASI");
     
     JTextField nid = new JTextField();
-    JLabel nids = new JLabel("NIK");
+    JLabel nids = new JLabel("NID");
     JLabel alert1 = new JLabel("MASUKAN NID TERLEBIH DAHULU ");
-    JButton update = new JButton("UPDATE");
+    JButton hitung = new JButton("HITUNG");
     
     
-    public PreUpdateDokter(){
+    public PreHitungGaji(){
         
         frame.setSize(1200, 700);
         frame.setLocationRelativeTo(null);
@@ -60,17 +60,17 @@ public class PreUpdateDokter implements ActionListener{
         menu_dokter.addActionListener(this);
         menu_pasien.addActionListener(this);
         menu_admin.addActionListener(this);
-        update.addActionListener(this);
+        hitung.addActionListener(this);
         
         alert1.setBounds(290, 200, 200, 50);
         nids.setBounds(290, 260, 100, 20);
         nid.setBounds(400, 260, 100, 20);
-        update.setBounds(350,300,120,50);
+        hitung.setBounds(350,300,120,50);
         
         
         
         
-        isi.add(update);
+        isi.add(hitung);
         isi.add(nids);
         isi.add(nid);
         isi.add(alert1);
@@ -98,14 +98,13 @@ public class PreUpdateDokter implements ActionListener{
                 new MenuAdmin();
                 frame.setVisible(false);
                 break;
-            case "UPDATE":
+            case "HITUNG":
                 Dokter dokter = control.getDokter(nid.getText());
-                new UpdateDokter(dokter);
+                new HitungGaji(dokter);
                 frame.setVisible(false);
                 break;
             default: 
                 break;
         }
     }
-    
 }

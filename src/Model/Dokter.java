@@ -31,7 +31,19 @@ public class Dokter extends User{
         this.Gaji = Gaji;
     }
     
-
+    public double hitungGaji(){
+        int hadir = 0;
+        for(int i = 0 ; i < this.Absen.size(); i ++){
+            AbsensiDokter absens = Absen.get(i);
+            if(absens.getStatus() == StatusAbsensi.MASUK){
+                hadir++;
+            }
+        }
+        double gaji = 250000 * hadir;
+        this.setGaji(gaji);
+        return gaji;
+    }
+    
     public String getNID() {
         return NID;
     }

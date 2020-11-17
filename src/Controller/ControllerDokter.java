@@ -49,10 +49,10 @@ public class ControllerDokter {
         }
         return dokters;
     }
-    public static Dokter getDokter(String nid){
+    public static Dokter getDokter(String nik){
         conn.connect();
         Dokter dokter = new Dokter();
-        String query = "SELECT * FROM dokter WHERE nik='" + nid + "'";
+        String query = "SELECT * FROM dokter WHERE nik='" + nik + "'";
         try {
             Statement stmt = conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
