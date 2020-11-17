@@ -36,7 +36,7 @@ public class PreUpdateDokter implements ActionListener{
     
     JTextField nid = new JTextField();
     JLabel nids = new JLabel("NIK");
-    JLabel alert1 = new JLabel("MASUKAN NID TERLEBIH DAHULU ");
+    JLabel alert1 = new JLabel("MASUKAN NIK TERLEBIH DAHULU ");
     JButton update = new JButton("UPDATE");
     
     
