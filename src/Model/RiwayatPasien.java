@@ -60,11 +60,17 @@ public class RiwayatPasien{
         this.tanggalKunjungan = tanggalKunjungan;
     }
 
+    @Override
     public String toString() {
         return "RiwayatPasien{" + "keluhan=" + keluhan + ", penyakit=" + penyakit + ", resepObat=" + resepObat + ", tanggalKunjungan=" + tanggalKunjungan + '}';
     }
     
-    
+    public void tambahRiwayatPasien(){
+        
+    }
+    public void lihatRiwayat1Pasien(){
+        
+    }
 
     
 }
