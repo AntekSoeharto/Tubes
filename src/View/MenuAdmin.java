@@ -25,6 +25,7 @@ public class MenuAdmin implements ActionListener{
     JButton menu_pasien = new JButton("PASIEN");
     JButton menu_dokter = new JButton("DOKTER");
     JButton menu_admin = new JButton("ADMINISTRASI");
+    JButton input_obat = new JButton("INPUT OBAT");
     
     public MenuAdmin(){
         
@@ -47,6 +48,9 @@ public class MenuAdmin implements ActionListener{
         menu_pasien.addActionListener(this);
         menu_admin.addActionListener(this);
         
+        input_obat.setBounds(350,100,200,50);
+        isi.add(input_obat);
+        input_obat.addActionListener(this);
         
         frame.add(isi);
         frame.add(menu);
@@ -67,6 +71,10 @@ public class MenuAdmin implements ActionListener{
                 break;
             case "ADMINISTRASI":
                 new MenuAdmin();
+                frame.setVisible(false);
+                break;
+            case "INPUT OBAT":
+                new InputObat();
                 frame.setVisible(false);
                 break;
             default: 
