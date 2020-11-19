@@ -28,16 +28,34 @@ public class ControllerObat {
     
     public static boolean addObat(Obat obat){
         conn.connect();
-        String query = "INSERT INTO obat VALUES(?,?,?,?,?,?,?) ";
+        String query = "INSERT INTO obat VALUES(?,?,?,?) ";
         try {
             PreparedStatement stmt = conn.con.prepareStatement(query);
-            stmt.setString(1, obat.getNama());
-            stmt.setInt(2, obat.getHargaBeli());
-            stmt.setInt(3, obat.getStok());
+            stmt.setString(1, obat.getIdObat());
+            stmt.setString(2, obat.getNama());
+            stmt.setInt(3, obat.getHargaBeli());
             stmt.setInt(4, obat.getHargaJual());
-            stmt.setString(5, Singleton.getInstance().getStaff().getIdCabang());
-            stmt.setObject(6, obat.getTgl_beli());
-            stmt.setObject(7, obat.getTgl_kadaluarsa());
+            stmt.executeUpdate();
+            boolean masa = addmasaObat(obat);
+            return (true);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return (false);
+        }        
+        
+    }
+    
+    public static boolean addmasaObat(Obat obat){
+        conn.connect();
+        String query = "INSERT INTO masa_berlaku_obat VALUES(?,?,?,?,?,?) ";
+        try {
+            PreparedStatement stmt = conn.con.prepareStatement(query);
+            stmt.setString(1, obat.getIdMlo());
+            stmt.setString(2, obat.getIdObat());
+            stmt.setObject(3, obat.getTgl_beli());
+            stmt.setObject(4, obat.getTgl_kadaluarsa());
+            stmt.setInt(5, obat.getStok());
+            stmt.setString(6, Singleton.getInstance().getStaff().getIdCabang());
             stmt.executeUpdate();
             return (true);
         } catch (SQLException e) {
@@ -46,10 +64,11 @@ public class ControllerObat {
         }        
     }
     
+    
     public static ArrayList<Obat> getallObat(){
         conn.connect();
         ArrayList<Obat> obats = new ArrayList<Obat>();
-        String query = "SELECT * FROM obat ";
+        String query = "SELECT * FROM obat WHERE ID_cabang = '" + Singleton.getInstance().getStaff().getIdCabang() + "' ";
         try {
             Statement stmt = conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(query);

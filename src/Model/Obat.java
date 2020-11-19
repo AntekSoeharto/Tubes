@@ -16,20 +16,42 @@ public class Obat {
     private int hargaJual;
     private String tgl_beli;
     private String tgl_kadaluarsa;
+    private String idObat;
+    private String idMlo;
     
     
     public Obat(){
         
     }
 
-    public Obat(String Nama, int hargaBeli, int Stok, int hargaJual, String tgl_beli, String tgl_kadaluarsa) {
+    public Obat(String Nama, int hargaBeli, int Stok, int hargaJual, String tgl_beli, String tgl_kadaluarsa, String idObat, String idMlo) {
         this.Nama = Nama;
         this.hargaBeli = hargaBeli;
         this.Stok = Stok;
         this.hargaJual = hargaJual;
         this.tgl_beli = tgl_beli;
         this.tgl_kadaluarsa = tgl_kadaluarsa;
+        this.idObat = idObat;
+        this.idMlo = idMlo;
     }
+
+    public String getIdObat() {
+        return idObat;
+    }
+
+    public void setIdObat(String idObat) {
+        this.idObat = idObat;
+    }
+
+    public String getIdMlo() {
+        return idMlo;
+    }
+
+    public void setIdMlo(String idMlo) {
+        this.idMlo = idMlo;
+    }
+    
+    
 
     public String getTgl_beli() {
         return tgl_beli;
