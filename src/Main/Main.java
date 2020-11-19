@@ -8,7 +8,7 @@ import Model.*;
 import java.util.ArrayList;
 import java.util.Date;
 import Controller.ControllerStaff;
-import View.*;
+import View.LoginScreen;
 /**
  *
  * @author hp
@@ -16,6 +16,5 @@ import View.*;
 public class Main {
     public static void main(String[] args){
         new LoginScreen();
-        
     }
 }
