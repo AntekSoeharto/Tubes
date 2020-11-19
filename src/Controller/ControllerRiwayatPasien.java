@@ -112,4 +112,25 @@ public class ControllerRiwayatPasien {
             return (false);
         }
     }
+    public static ArrayList<String> getResepObatPasien(){
+        ArrayList<String> resepObat = new ArrayList<>();
+        conn.connect();
+        String query = "SELECT a.Nama_obat,d.Nama "
+                + "FROM obat a,Resep_Obat_Pasien b,riwayat_pasien c,pasien d "
+                + "WHERE a.ID_Obat = b.ID_Obat "
+                + "AND b.NIK = c.NIK "
+                + "AND c.NIK = d.NIK;";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                String RO = new String();
+                RO = rs.getString("Penyakit");
+                resepObat.add(RO);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resepObat;
+    }
 }
