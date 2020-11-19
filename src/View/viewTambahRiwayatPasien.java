@@ -195,6 +195,7 @@ public class viewTambahRiwayatPasien {
                     namaObats.add(namaObatFields[i].getText());
                 }
                 RP.setResepObat(namaObats);
+                //
             }
         });
         buttonPrev.addActionListener(new ActionListener() {

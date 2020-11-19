@@ -111,6 +111,7 @@ public class ViewBeliObat {
              @Override
              public void actionPerformed(ActionEvent e) {
                 //looping query ke DB bwt cek stok obat
+                //tranksaksi masukkin ke db
             }
         });
     }
