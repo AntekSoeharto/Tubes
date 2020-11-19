@@ -49,6 +49,8 @@ public class ControllerDokter {
         }
         return dokters;
     }
+    
+   
     public static Dokter getDokter(String nik){
         conn.connect();
         Dokter dokter = new Dokter();
@@ -141,8 +143,8 @@ public class ControllerDokter {
         try {
             PreparedStatement stmt = conn.con.prepareStatement(query);
             stmt.setObject(1, tanggal);
-            stmt.setObject(2, status);
-            stmt.setObject(3, nid);
+            stmt.setString(2, status);
+            stmt.setString(3, nid);
             stmt.executeUpdate();
             return (true);
         } catch (SQLException e) {
