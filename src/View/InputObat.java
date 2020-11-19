@@ -50,7 +50,6 @@ public class InputObat implements ActionListener{
     JLabel labStok = new JLabel("Stok");
     JLabel labTglbeli = new JLabel("Tgl Beli");
     JLabel labTglkadaluarsa = new JLabel("Tgl Jual");
-    JTextField textNik = new JTextField();
     JTextField textNama = new JTextField();
     JTextField textBeli = new JTextField();
     UtilDateModel model1 = new UtilDateModel();
@@ -94,24 +93,21 @@ public class InputObat implements ActionListener{
         //akhir template
         
         //isi menu
-        
-        
-        
         labNama.setBounds(50, 80, 80, 20);
         isi.add(labNama);
         textNama.setBounds(200, 80, 300, 20);
         isi.add(textNama);
-        labBeli.setBounds(50, 110, 80, 20);
+        labBeli.setBounds(50, 120, 80, 20);
         isi.add(labBeli);
-        textBeli.setBounds(200, 110, 300, 20);
+        textBeli.setBounds(200, 120, 300, 20);
         isi.add(textBeli);
-        labJual.setBounds(50, 140, 80, 20);
+        labJual.setBounds(50, 160, 80, 20);
         isi.add(labJual);
-        textJual.setBounds(200, 140, 300, 20);
+        textJual.setBounds(200, 160, 300, 20);
         isi.add(textJual);
-        labStok.setBounds(50, 170, 80, 20);
+        labStok.setBounds(50, 200, 80, 20);
         isi.add(labStok);
-        textStok.setBounds(200, 170, 300, 20);
+        textStok.setBounds(200, 200, 300, 20);
         isi.add(textStok);
         
         
@@ -125,13 +121,13 @@ public class InputObat implements ActionListener{
 //        isi.add(labTgllahir);
 //        isi.add(datePicker);
         
-        labTglbeli.setBounds(50, 200, 80, 20);
+        labTglbeli.setBounds(50, 240, 80, 20);
         isi.add(labTglbeli);
-        tgl_beli.setBounds(200, 200, 300, 20);
+        tgl_beli.setBounds(200, 240, 300, 20);
         isi.add(tgl_beli);
-        labTglkadaluarsa.setBounds(50, 230, 80, 20);
+        labTglkadaluarsa.setBounds(50, 280, 80, 20);
         isi.add(labTglkadaluarsa);
-        tgl_kadaluarsa.setBounds(200, 230, 300, 20);
+        tgl_kadaluarsa.setBounds(200, 280, 300, 20);
         isi.add(tgl_kadaluarsa);
         
         
@@ -166,25 +162,22 @@ public class InputObat implements ActionListener{
                 int jual = Integer.parseInt(textJual.getText());
                 String strnama = textNama.getText();
                 int stok = Integer.parseInt(textStok.getText());
-                String strtglbeli = model1.getDay() + "-" + model1.getMonth() + "-" + model1.getYear();
-                String strtglkadal = model2.getDay() + "-" + model2.getMonth() + "-" + model2.getYear();
-                String strgoldar = "";
-                
+                String strtglbeli = model1.getYear() + "-" + model1.getMonth() + "-" + model1.getDay();
+                String strtglkadal = model2.getYear() + "-" + model2.getMonth() + "-" + model2.getDay();
                 
                 Obat obat = new Obat(strnama, beli, stok, jual, strtglbeli, strtglkadal);
-                
+
                 boolean input = control.addObat(obat);
                 if(input == true){
                     frame.setVisible(false);
                     JOptionPane.showMessageDialog(null,"Data Sudah Di Tambah");
-                    new MenuDokter();
+                    new MenuAdmin();
                     frame.setVisible(false);
                 }                
             default: 
                 break;
         }
     }
-    
     
     
 }
