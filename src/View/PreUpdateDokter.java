@@ -17,13 +17,16 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Properties;
 
-public class PreUpdateDokter implements ActionListener{
+public class PreUpdateDokter implements ActionListener, MouseListener{
     ControllerDokter control = new ControllerDokter();
     
     JFrame frame = new JFrame("Pre Update Dokter");
@@ -34,10 +37,9 @@ public class PreUpdateDokter implements ActionListener{
     JButton menu_dokter = new JButton("DOKTER");
     JButton menu_admin = new JButton("ADMINISTRASI");
     
-    JTextField nid = new JTextField();
-    JLabel nids = new JLabel("NIK");
-    JLabel alert1 = new JLabel("MASUKAN NIK TERLEBIH DAHULU ");
-    JButton update = new JButton("UPDATE");
+    
+    JTable table;
+    JScrollPane scroll;
     
     
     public PreUpdateDokter(){
@@ -60,25 +62,49 @@ public class PreUpdateDokter implements ActionListener{
         menu_dokter.addActionListener(this);
         menu_pasien.addActionListener(this);
         menu_admin.addActionListener(this);
-        update.addActionListener(this);
-        
-        alert1.setBounds(290, 200, 200, 50);
-        nids.setBounds(290, 260, 100, 20);
-        nid.setBounds(400, 260, 100, 20);
-        update.setBounds(350,300,120,50);
         
         
+        ArrayList<Dokter> dokters = control.getAllDokter();
+        String[] header = {"NIK", "NID", "Nama", "Poliklinik"};
+        
+        String[][] isitable = new String[dokters.size()][5];
+        
+        for(int i = 0; i < dokters.size(); i++){
+            Dokter dokter = dokters.get(i);
+            isitable[i][0] = dokter.getNIK();
+            isitable[i][1] = dokter.getNID();
+            isitable[i][2] = dokter.getNama();
+            isitable[i][3] = dokter.getPoliklinik();
+        }
+        
+        table = new JTable(isitable, header);
+        scroll = new JScrollPane(table);
+        scroll.setBounds(50, 50, 800, 500);
+        isi.add(scroll);
+        
+        frame.setVisible(true);
+        table.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(final MouseEvent e){
+                if(e.getClickCount() == 1){
+                    final JTable jTable= (JTable)e.getSource();
+                    final int row = jTable.getSelectedRow();
+                    final int column = 0;
+                    final String valueInCell = (String)jTable.getValueAt(row, column);
+                    Dokter dokter = control.getDokter(valueInCell);
+                    frame.setVisible(false);
+                    new UpdateDokter(dokter);
+                }
+            }
+        });
         
         
-        isi.add(update);
-        isi.add(nids);
-        isi.add(nid);
-        isi.add(alert1);
+        
         
         
         frame.add(isi);
         frame.add(menu);
-        frame.setVisible(true);
+        
     }
     
     
@@ -98,14 +124,34 @@ public class PreUpdateDokter implements ActionListener{
                 new MenuAdmin();
                 frame.setVisible(false);
                 break;
-            case "UPDATE":
-                Dokter dokter = control.getDokter(nid.getText());
-                new UpdateDokter(dokter);
-                frame.setVisible(false);
-                break;
             default: 
                 break;
         }
     }
-    
+
+    @Override
+    public void mouseClicked(MouseEvent me) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mousePressed(MouseEvent me) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent me) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent me) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseExited(MouseEvent me) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+ 
 }
