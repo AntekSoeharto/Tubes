@@ -34,10 +34,11 @@ public class PreHitungGaji implements ActionListener{
     JButton menu_dokter = new JButton("DOKTER");
     JButton menu_admin = new JButton("ADMINISTRASI");
     
-    JTextField nid = new JTextField();
     JLabel nids = new JLabel("NID");
-    JLabel alert1 = new JLabel("MASUKAN NID TERLEBIH DAHULU ");
     JButton hitung = new JButton("HITUNG");
+    ArrayList<Dokter> dokters= control.getAllDokter();
+    String[] listnid;
+    JComboBox nid;
     
     
     public PreHitungGaji(){
@@ -62,18 +63,24 @@ public class PreHitungGaji implements ActionListener{
         menu_admin.addActionListener(this);
         hitung.addActionListener(this);
         
-        alert1.setBounds(290, 200, 200, 50);
         nids.setBounds(290, 260, 100, 20);
-        nid.setBounds(400, 260, 100, 20);
         hitung.setBounds(350,300,120,50);
         
+        listnid = new String[dokters.size()];
+        
+        for(int i = 0; i < dokters.size(); i++){
+            Dokter dokter = dokters.get(i);
+            listnid[i] = dokter.getNID();
+        }
+        
+        nid = new JComboBox(listnid);
+        nid.setBounds(400, 260, 100, 20);
         
         
         
         isi.add(hitung);
         isi.add(nids);
         isi.add(nid);
-        isi.add(alert1);
         
         
         frame.add(isi);
@@ -99,7 +106,8 @@ public class PreHitungGaji implements ActionListener{
                 frame.setVisible(false);
                 break;
             case "HITUNG":
-                Dokter dokter = control.getDokter(nid.getText());
+                String strnid = String.valueOf(nid.getSelectedItem());;
+                Dokter dokter = control.getDokter(strnid);
                 new HitungGaji(dokter);
                 frame.setVisible(false);
                 break;
