@@ -65,18 +65,17 @@ public class ControllerObat {
     }
     
     
-    public static ArrayList<Obat> getallObat(){
+    public static ArrayList<Obat> getallObatReStock(String id_cabang){
         conn.connect();
         ArrayList<Obat> obats = new ArrayList<Obat>();
-        String query = "SELECT * FROM obat WHERE ID_cabang = '" + Singleton.getInstance().getStaff().getIdCabang() + "' ";
+        String query = "SELECT * FROM masa_obat_pasien WHERE ID_cabang = '" + id_cabang + "' ";
         try {
             Statement stmt = conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 Obat obat = new Obat();
-                obat.setNama(rs.getString("Nama_obat"));
-                obat.setHargaBeli(Integer.parseInt(rs.getString("Harga_beli")));
-                obat.setHargaJual(Integer.parseInt(rs.getString("Harga_jual")));
+                obat.setIdMlo(rs.getString("ID_MLO"));
+                obat.setIdObat(rs.getString("ID_obat"));
                 obat.setStok(Integer.parseInt(rs.getString("Stok")));
                 obat.setTgl_beli(rs.getString("Tgl_beli"));
                 obat.setTgl_kadaluarsa(rs.getString("Tgl_kadaluarsa"));
@@ -86,6 +85,29 @@ public class ControllerObat {
             e.printStackTrace();
         }
         return obats;
-    
     }
+    
+//    public static boolean ReStockObat(Obat obat){
+//        conn.connect();
+//        String query = "UPDATE masa_obat_pasien SET nik='" + dokter.getNIK() + "', "
+//                + "nama='" + dokter.getNama() + "', "
+//                + "Tgl_Lahir='" + (Object)dokter.getTglLahir() + "', "
+//                + "Goldar='" + dokter.getGolDar() + "', "
+//                + "Gender='" + dokter.getGender() + "', "
+//                + "NID='" + dokter.getNID() + "', "
+//                + "Poliklinik='" + dokter.getPoliklinik() + "', "
+//                + "No_Telepon='" + dokter.getTelepon() + "', "
+//                + "Alamat='" + dokter.getAlamat() + "', "
+//                + "ID_cabang='" + Singleton.getInstance().getStaff().getIdCabang() + "' "
+//                + "WHERE nik='" + dokter.getNIK() + "'";
+//        try {
+//            Statement stmt = conn.con.createStatement();
+//            stmt.executeUpdate(query);
+//            return (true);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            return (false);
+//        }
+//    }
+    
 }
