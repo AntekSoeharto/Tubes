@@ -66,7 +66,7 @@ public class ControllerPasien {
                 pasien.setGender(rs.getString("Gender"));
                 pasien.setAlergi(rs.getString("Alergi"));
                 pasien.setPenyakitMenurun(rs.getString("Penyakit_Menurun"));
-                pasien.setBPJS((GolonganPasien) rs.getObject("Golongan"));
+                pasien.setBPJS(GolonganPasien.valueOf(rs.getString("Golongan")));
                 pasien.setAlamat(rs.getString("Alamat"));
                 pasien.setTelepon(rs.getString("No_telepon"));
             }
@@ -93,6 +93,7 @@ public class ControllerPasien {
             stmt.setObject(8, pasien.getBPJS());
             stmt.setString(9, pasien.getTelepon());
             stmt.setString(10, pasien.getAlamat());
+            stmt.setString(11, Singleton.getInstance().getStaff().getIdCabang());
             stmt.executeUpdate();
             return (true);
         } catch (SQLException e) {
