@@ -5,6 +5,7 @@
  */
 package View;
 
+import Model.Singleton;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,7 +26,8 @@ public class MenuPasien implements ActionListener{
     JButton menu_pasien = new JButton("PASIEN");
     JButton menu_dokter = new JButton("DOKTER");
     JButton menu_admin = new JButton("ADMINISTRASI");
-    JButton insertPasienBaru,searchPasien,beliObat,tambahRiwayatPasien,buatJanjiTemu;
+    JButton insertPasienBaru,searchPasien,beliObat,tambahRiwayatPasien,buatJanjiTemu
+            ,lihatRiwayatPasien;
     
     public MenuPasien(){
 
@@ -34,6 +36,7 @@ public class MenuPasien implements ActionListener{
         beliObat = new JButton("beli obat");
         tambahRiwayatPasien = new JButton("update riwayat pasien");
         buatJanjiTemu = new JButton("Janji Temu");
+        lihatRiwayatPasien = new JButton("lihat riwayat pasien");
         
         frame.setSize(1200, 700);
         frame.setLocationRelativeTo(null);
@@ -49,13 +52,14 @@ public class MenuPasien implements ActionListener{
         menu_admin.setBounds(35,320,120,50);
         insertPasienBaru.setBounds(265, 10, 150, 25);
         searchPasien.setBounds(265, 50, 130, 25);
-        beliObat.setBounds(265, 90, 150, 25);
-        tambahRiwayatPasien.setBounds(265, 130, 160, 25);
-        buatJanjiTemu.setBounds(265, 170, 120, 25);
+        tambahRiwayatPasien.setBounds(265, 90, 160, 25);
+        buatJanjiTemu.setBounds(265, 130, 120, 25);
+        lihatRiwayatPasien.setBounds(265, 170, 130, 25);
+        
         isi.add(insertPasienBaru);
         isi.add(searchPasien);
-        isi.add(beliObat);
         isi.add(tambahRiwayatPasien);
+        isi.add(lihatRiwayatPasien);
         isi.add(buatJanjiTemu);
         menu.add(menu_dokter);
         menu.add(menu_pasien);
@@ -71,9 +75,9 @@ public class MenuPasien implements ActionListener{
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         insertPasienBaru.addActionListener(this);
         searchPasien.addActionListener(this);
-        beliObat.addActionListener(this);
         tambahRiwayatPasien.addActionListener(this);
         buatJanjiTemu.addActionListener(this);
+        lihatRiwayatPasien.addActionListener(this);
     }
 
     @Override
@@ -83,6 +87,7 @@ public class MenuPasien implements ActionListener{
             case "PASIEN": 
                 new MenuPasien();
                 frame.setVisible(false);
+                System.out.println(Singleton.getInstance().getCabang());
                 break;
             case "DOKTER":
                 new MenuDokter();
@@ -100,16 +105,16 @@ public class MenuPasien implements ActionListener{
                 new ViewSearchPasien();
                 frame.setVisible(false);
                 break;
-            case "beli obat":
-                new ViewBeliObat();
-                frame.setVisible(false);
-                break;
             case "update riwayat pasien":
                 new viewTambahRiwayatPasien();
                 frame.setVisible(false);
                 break;
             case "Janji Temu":
                 new ViewJanjiTemu();
+                frame.setVisible(false);
+                break;
+            case "lihat riwayat pasien":
+                new viewLihatRiwayat1Pasien();
                 frame.setVisible(false);
                 break;
             default: 
