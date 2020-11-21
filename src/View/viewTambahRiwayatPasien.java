@@ -5,7 +5,10 @@
  */
 package View;
 
+import Controller.ControllerObat;
 import Controller.ControllerPasien;
+import Controller.ControllerRiwayatPasien;
+import Model.Obat;
 import Model.Pasien;
 import Model.RiwayatPasien;
 import com.mysql.cj.util.StringUtils;
@@ -183,19 +186,24 @@ public class viewTambahRiwayatPasien {
                 Pasien p = new Pasien();
                 try {
                     p = ControllerPasien.getPasien(NIKField.getText());
+                    RiwayatPasien RP = new RiwayatPasien();
+                    RP.setKeluhan(KeluhanTextField.getText());
+                    RP.setPenyakit(penyakitTextField.getText());
+                    List<String> namaObats = new ArrayList<>();
+                    ArrayList<Obat> obatPasien = new ArrayList<>();
+                    RP.setTanggalKunjungan((Date)tglKunjungan.getModel().getValue());
+                    for(int i = 0 ; i < namaObatFields.length ; i++){
+                        obatPasien.add(new ControllerObat().getObat(namaObatFields[i].getText()));
+                        ControllerObat.insertResepObatPasien(obatPasien.get(i).getIDObat(), p.getNIK());
+                    }
+                    RP.setResepObat(namaObats);
+                    ControllerRiwayatPasien.insertNewRiwayatPasien(RP,p.getNIK());
+                    JOptionPane.showMessageDialog(null, "riwayat ditambah");
                 } catch (Exception exc) {
+                    p = ControllerPasien.getPasien(NIKField.getText());
+                    System.out.println(p.getNama());
                     JOptionPane.showMessageDialog(null, "Pasien tidak ditemukan!");
                 }
-                RiwayatPasien RP = new RiwayatPasien();
-                RP.setKeluhan(KeluhanTextField.getText());
-                RP.setPenyakit(penyakitTextField.getText());
-                List<String> namaObats = new ArrayList<>();
-                RP.setTanggalKunjungan((Date)tglKunjungan.getModel().getValue());
-                for(int i = 0 ; i < namaObatFields.length ; i++){
-                    namaObats.add(namaObatFields[i].getText());
-                }
-                RP.setResepObat(namaObats);
-                //
             }
         });
         buttonPrev.addActionListener(new ActionListener() {
