@@ -111,7 +111,7 @@ public class PreHitungGaji implements ActionListener{
                 new HitungGaji(dokter);
                 frame.setVisible(false);
                 break;
-            default: 
+             default: 
                 break;
         }
     }
