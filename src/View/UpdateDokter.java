@@ -203,7 +203,7 @@ public class UpdateDokter implements ActionListener{
             case "SUBMIT":
                 String strnik = textNik.getText();
                 String strnama = textNik.getText();
-                String strlahir = model.getDay() + "-" + model.getMonth() + "-" + model.getYear();
+                String strlahir = model.getYear() + "-" + model.getMonth() + "-" + model.getDay();
                 String strgoldar = "";
                 if (gola.isSelected()) {
                     strgoldar = gola.getText();
@@ -230,15 +230,12 @@ public class UpdateDokter implements ActionListener{
                 
                 Date lahir = (Date)datePicker.getModel().getValue();
                 Dokter dokter = new Dokter(strnid, strpoli, strnama, strnik, lahir, strgoldar, strgender, stralamat, strnotelp);
-                JOptionPane.showMessageDialog(null,"sudah disini" + dokter.getNIK());
-                boolean update = control.updateDokter(dokter);
+                JOptionPane.showMessageDialog(null,"Data Sudah Di Ubah");
+                boolean update = control.updateDokter(dokter, strlahir);
                 if(update == true){
                     frame.setVisible(false);
                     new MenuDokter();
                 }
-                
-                
-                
             default: 
                 break;
         }

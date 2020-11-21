@@ -100,11 +100,11 @@ public class ControllerDokter {
         }
     }
     
-    public static boolean updateDokter(Dokter dokter){
+    public static boolean updateDokter(Dokter dokter, String tgllahir){
         conn.connect();
         String query = "UPDATE dokter SET nik='" + dokter.getNIK() + "', "
                 + "nama='" + dokter.getNama() + "', "
-                + "Tgl_Lahir='" + (Object)dokter.getTglLahir() + "', "
+                + "Tgl_Lahir='" + tgllahir + "', "
                 + "Goldar='" + dokter.getGolDar() + "', "
                 + "Gender='" + dokter.getGender() + "', "
                 + "NID='" + dokter.getNID() + "', "

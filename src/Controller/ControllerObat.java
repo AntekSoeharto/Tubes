@@ -31,6 +31,7 @@ public class ControllerObat {
         String query = "INSERT INTO obat VALUES(?,?,?,?) ";
         try {
             PreparedStatement stmt = conn.con.prepareStatement(query);
+
             stmt.setString(1, obat.getIDObat());
             stmt.setString(2, obat.getNama());
             stmt.setInt(3, obat.getHargaBeli());
@@ -63,15 +64,14 @@ public class ControllerObat {
     public static ArrayList<Obat> getAllObat(){
         conn.connect();
         ArrayList<Obat> obats = new ArrayList<Obat>();
-        String query = "SELECT * FROM obat ";
+        String query = "SELECT * FROM masa_obat_pasien WHERE ID_cabang = '" + id_cabang + "' ";
         try {
             Statement stmt = conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 Obat obat = new Obat();
-                obat.setNama(rs.getString("Nama_obat"));
-                obat.setHargaBeli(Integer.parseInt(rs.getString("Harga_beli")));
-                obat.setHargaJual(Integer.parseInt(rs.getString("Harga_jual")));
+                obat.setIdMlo(rs.getString("ID_MLO"));
+                obat.setIdObat(rs.getString("ID_obat"));
                 obat.setStok(Integer.parseInt(rs.getString("Stok")));
                 obat.setTgl_beli(rs.getString("Tgl_beli"));
                 obat.setTgl_kadaluarsa(rs.getString("Tgl_kadaluarsa"));
@@ -81,8 +81,8 @@ public class ControllerObat {
             e.printStackTrace();
         }
         return obats;
-    
     }
+
     public static Obat getObat(String namaObat) {
         conn.connect();
         String query = "SELECT * FROM obat WHERE Nama_obat='" + namaObat + "'";
@@ -195,4 +195,5 @@ public class ControllerObat {
         return (stockObat);
         
     }
+
 }

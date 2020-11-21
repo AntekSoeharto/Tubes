@@ -75,24 +75,32 @@ public class InputObat implements ActionListener{
         menu_admin.setBounds(35,320,120,50);
         menu.add(menu_dokter);
         menu.add(menu_pasien);
-        menu.add(menu_admin);
+        menu.add(menu_admin);       
         menu_dokter.addActionListener(this);
         menu_pasien.addActionListener(this);
         menu_admin.addActionListener(this);
         //akhir template
         
         //isi menu
-        labNama.setBounds(50, 80, 80, 20);
+        labidobat.setBounds(50, 80, 80, 20);
+        isi.add(labidobat);
+        textidobat.setBounds(200, 80, 300, 20);
+        isi.add(textidobat);
+        labidmlo.setBounds(50, 120, 80, 20);
+        isi.add(labidmlo);
+        textidmlo.setBounds(200, 120, 300, 20);
+        isi.add(textidmlo);
+        labNama.setBounds(50, 160, 80, 20);
         isi.add(labNama);
-        textNama.setBounds(200, 80, 300, 20);
+        textNama.setBounds(200, 160, 300, 20);
         isi.add(textNama);
-        labBeli.setBounds(50, 120, 80, 20);
+        labBeli.setBounds(50, 200, 80, 20);
         isi.add(labBeli);
-        textBeli.setBounds(200, 120, 300, 20);
+        textBeli.setBounds(200, 200, 300, 20);
         isi.add(textBeli);
-        labJual.setBounds(50, 160, 80, 20);
+        labJual.setBounds(50, 240, 80, 20);
         isi.add(labJual);
-        textJual.setBounds(200, 160, 300, 20);
+        textJual.setBounds(200, 240, 300, 20);
         isi.add(textJual);
         
         submit.setBounds(350,400,120,50);
@@ -124,7 +132,6 @@ public class InputObat implements ActionListener{
                 int beli = Integer.parseInt(textBeli.getText());
                 int jual = Integer.parseInt(textJual.getText());
                 String strnama = textNama.getText();
-                
                 Obat obat = new Obat();
                 obat.setIDObat(control.getLastIDObat());
                 obat.setNama(strnama);

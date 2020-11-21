@@ -25,6 +25,7 @@ import org.jdatepicker.impl.UtilDateModel;
  *
  * @author hp
  */
+
 public class ReStockObat implements ActionListener{
     private ControllerObat control = new ControllerObat();
     JFrame frame = new JFrame("reStock obat");
@@ -37,6 +38,7 @@ public class ReStockObat implements ActionListener{
     JDatePanelImpl datePanel2 = new JDatePanelImpl(model2, p);
     JDatePickerImpl tgl_beli = new JDatePickerImpl(datePanel1, new DateLabelFormatter());
     JDatePickerImpl tgl_kadaluarsa = new JDatePickerImpl(datePanel2, new DateLabelFormatter());
+
     JPanel menu = new JPanel();
     JPanel isi = new JPanel();
     JButton menu_pasien = new JButton("PASIEN");
@@ -92,7 +94,6 @@ public class ReStockObat implements ActionListener{
         menu_pasien.addActionListener(this);
         menu_admin.addActionListener(this);
         submit.addActionListener(this);
-        
         frame.add(isi);
         frame.add(menu);
         frame.setVisible(true);
@@ -133,7 +134,7 @@ public class ReStockObat implements ActionListener{
                     JOptionPane.showMessageDialog(null,"Data Sudah Di Tambah");
                     new MenuAdmin();
                     frame.setVisible(false);
-                }                
+                }
             default: 
                 break;
         }
