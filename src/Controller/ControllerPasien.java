@@ -90,7 +90,7 @@ public class ControllerPasien {
             stmt.setString(5, pasien.getGender());
             stmt.setString(6, pasien.getAlergi());
             stmt.setString(7, pasien.getPenyakitMenurun());
-            stmt.setObject(8, pasien.getBPJS());
+            stmt.setObject(8, String.valueOf(pasien.getBPJS()));
             stmt.setString(9, pasien.getTelepon());
             stmt.setString(10, pasien.getAlamat());
             stmt.setString(11, Singleton.getInstance().getStaff().getIdCabang());
