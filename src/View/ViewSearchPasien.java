@@ -113,6 +113,7 @@ public class ViewSearchPasien implements ActionListener{
         viewSearchPasien.add(panelContent);
         viewSearchPasien.add(panelMenu);
         viewSearchPasien.setVisible(true);
+        viewSearchPasien.setLocationRelativeTo(null);
         viewSearchPasien.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         menu_dokter.addActionListener(this);
         menu_pasien.addActionListener(this);
@@ -169,6 +170,7 @@ public class ViewSearchPasien implements ActionListener{
                 break;
             case "Ubah Data Pasien":
                 p = ControllerPasien.getPasien(NIKInputTextField.getText());
+                viewSearchPasien.setVisible(false);
                 new ViewUpdateDataPasien(p.getNIK());
                 break;
             default: 
