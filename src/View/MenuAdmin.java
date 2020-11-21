@@ -27,6 +27,7 @@ public class MenuAdmin implements ActionListener{
     JButton menu_admin = new JButton("ADMINISTRASI");
     JButton input_obat = new JButton("INPUT OBAT");
     JButton restock_obat = new JButton("RESTOCK OBAT");
+    JButton rujukan = new JButton("RUJUKAN");
     
     public MenuAdmin(){
         
@@ -53,9 +54,14 @@ public class MenuAdmin implements ActionListener{
         isi.add(input_obat);
         input_obat.addActionListener(this);
         
-        restock_obat.setBounds(350,140,200,50);
+        restock_obat.setBounds(350,170,200,50);
         isi.add(restock_obat);
         restock_obat.addActionListener(this);
+        
+        rujukan.setBounds(350,240,200,50);
+        isi.add(rujukan);
+        rujukan.addActionListener(this);
+        
         frame.add(isi);
         frame.add(menu);
         frame.setVisible(true);
@@ -83,6 +89,10 @@ public class MenuAdmin implements ActionListener{
                 break;
             case "RESTOCK OBAT":
                 new ReStockObat();
+                frame.setVisible(false);
+                break;
+            case "RUJUKAN":
+                new PreRujukan();
                 frame.setVisible(false);
                 break;
             default: 

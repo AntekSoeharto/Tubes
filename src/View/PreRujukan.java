@@ -10,8 +10,8 @@ package View;
  * @author hp
  */
 
-import Model.*;
 import Controller.*;
+import Model.*;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -21,27 +21,35 @@ import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Properties;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
 
-public class PreHitungGaji implements ActionListener{
-    ControllerDokter control = new ControllerDokter();
+public class PreRujukan implements ActionListener{
     
-    JFrame frame = new JFrame("Pre Update Dokter");
+    JFrame frame = new JFrame("Absensi Dokter");
     JPanel menu = new JPanel();
     JPanel isi = new JPanel();
+    JLabel labNid = new JLabel("NIK");
+    JTextField textNid = new JTextField();
+    JLabel namars = new JLabel("Rumah Sakit");
+    
+    
     
     JButton menu_pasien = new JButton("PASIEN");
     JButton menu_dokter = new JButton("DOKTER");
     JButton menu_admin = new JButton("ADMINISTRASI");
+    JButton submit = new JButton("SUBMIT");
+    String[] listrs = {"Rumah Sakit Boromeus", "Rumah Santosa Pasir Kaliki", "Rumah Sakit Santosa Kopo", "Rumah Sakit Immanuel"};
+    JComboBox rs = new JComboBox(listrs);
     
-    JLabel nids = new JLabel("NID");
-    JButton hitung = new JButton("HITUNG");
-    ArrayList<Dokter> dokters= control.getAllDokter();
-    String[] listnid;
-    JComboBox nid;
+    private ControllerPasien control = new ControllerPasien();
     
     
-    public PreHitungGaji(){
+    
+    public PreRujukan(){
         
         frame.setSize(1200, 700);
         frame.setLocationRelativeTo(null);
@@ -61,26 +69,17 @@ public class PreHitungGaji implements ActionListener{
         menu_dokter.addActionListener(this);
         menu_pasien.addActionListener(this);
         menu_admin.addActionListener(this);
-        hitung.addActionListener(this);
         
-        nids.setBounds(290, 260, 100, 20);
-        hitung.setBounds(350,300,120,50);
+        labNid.setBounds(290, 230, 100, 20);
+        textNid.setBounds(400, 230, 200, 20);
         
-        listnid = new String[dokters.size()];
+        submit.addActionListener(this);
+        submit.setBounds(350, 350, 150, 50);
         
-        for(int i = 0; i < dokters.size(); i++){
-            Dokter dokter = dokters.get(i);
-            listnid[i] = dokter.getNID();
-        }
+        isi.add(labNid);
+        isi.add(textNid);
+        isi.add(submit);
         
-        nid = new JComboBox(listnid);
-        nid.setBounds(400, 260, 100, 20);
-        
-        
-        
-        isi.add(hitung);
-        isi.add(nids);
-        isi.add(nid);
         
         
         frame.add(isi);
@@ -104,15 +103,16 @@ public class PreHitungGaji implements ActionListener{
             case "ADMINISTRASI":
                 new MenuAdmin();
                 frame.setVisible(false);
-                break;
-            case "HITUNG":
-                String strnid = String.valueOf(nid.getSelectedItem());;
-                Dokter dokter = control.getDokter(strnid);
-                new HitungGaji(dokter);
+                break; 
+            case "SUBMIT":
+                String strnid = textNid.getText();
+                Pasien pasien = control.getPasien(strnid);
+                String strrs = String.valueOf(rs.getSelectedItem());;
                 frame.setVisible(false);
-                break;
-             default: 
+                new Rujukan(pasien, strrs);
+            default: 
                 break;
         }
     }
+    
 }

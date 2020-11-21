@@ -11,7 +11,6 @@ package View;
  */
 
 import Model.*;
-import Controller.*;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -23,25 +22,20 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Properties;
 
-public class PreHitungGaji implements ActionListener{
-    ControllerDokter control = new ControllerDokter();
+public class Rujukan implements ActionListener{
     
-    JFrame frame = new JFrame("Pre Update Dokter");
+    JFrame frame = new JFrame("MainMenu");
     JPanel menu = new JPanel();
     JPanel isi = new JPanel();
     
     JButton menu_pasien = new JButton("PASIEN");
     JButton menu_dokter = new JButton("DOKTER");
     JButton menu_admin = new JButton("ADMINISTRASI");
-    
-    JLabel nids = new JLabel("NID");
-    JButton hitung = new JButton("HITUNG");
-    ArrayList<Dokter> dokters= control.getAllDokter();
-    String[] listnid;
-    JComboBox nid;
+    JTextArea rujuks;
+    String text;
     
     
-    public PreHitungGaji(){
+    public Rujukan(Pasien pasien, String rs){
         
         frame.setSize(1200, 700);
         frame.setLocationRelativeTo(null);
@@ -61,26 +55,21 @@ public class PreHitungGaji implements ActionListener{
         menu_dokter.addActionListener(this);
         menu_pasien.addActionListener(this);
         menu_admin.addActionListener(this);
-        hitung.addActionListener(this);
+        text = "\n\n\n\n\t\t\t\tSurat Rujukan Pasien\n\tKami dari staff dan dokter dari puskesmas ingin mengirim pasien kami.";
+        text += "Karena\nalasan kekurangn sumber daya manusia dan alat medis di puskesmas kami. Dengan ini data pasien:\n";
+        text += "\tNIK\t: " + pasien.getNama() + "\n";
+        text += "\tNama\t: " + pasien.getNama() + "\n";
+        text += "\tTelepon\t: " + pasien.getTelepon() + "\n";
+        text += "\t Dengan ini kami menyatakan bahwa tanggung jawab pasien ini ada di tangan Rumah Sakit " + rs;
+        text += ".\nAtas Kerjasamanya Terimakasih\n\n\n";
+        text += "\t\t\t\t\t\tStaff Puskesmas\n\n\n";
+        text += "\t\t\t\t\t\t" + Singleton.getInstance().getStaff().getUsername();
+        rujuks = new JTextArea(text);
+        rujuks.setBounds(10, 10, 1000, 600);
+        rujuks.setFont(rujuks.getFont().deriveFont(15f));
+        System.out.println(text);
+        isi.add(rujuks);
         
-        nids.setBounds(290, 260, 100, 20);
-        hitung.setBounds(350,300,120,50);
-        
-        listnid = new String[dokters.size()];
-        
-        for(int i = 0; i < dokters.size(); i++){
-            Dokter dokter = dokters.get(i);
-            listnid[i] = dokter.getNID();
-        }
-        
-        nid = new JComboBox(listnid);
-        nid.setBounds(400, 260, 100, 20);
-        
-        
-        
-        isi.add(hitung);
-        isi.add(nids);
-        isi.add(nid);
         
         
         frame.add(isi);
@@ -105,14 +94,9 @@ public class PreHitungGaji implements ActionListener{
                 new MenuAdmin();
                 frame.setVisible(false);
                 break;
-            case "HITUNG":
-                String strnid = String.valueOf(nid.getSelectedItem());;
-                Dokter dokter = control.getDokter(strnid);
-                new HitungGaji(dokter);
-                frame.setVisible(false);
-                break;
-             default: 
+            default: 
                 break;
         }
     }
+    
 }
