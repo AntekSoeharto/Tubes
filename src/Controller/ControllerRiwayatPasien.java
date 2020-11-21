@@ -45,12 +45,13 @@ public class ControllerRiwayatPasien {
         }
         return (RPs);
     }
-    public static ArrayList<RiwayatPasien> getAllRiwayatPasiensByDate(Date tglKunjungan) {
+    public static ArrayList<RiwayatPasien> getAllRiwayatPasiensByDate(Date tglKunjungan,String NIK) {
         ArrayList<RiwayatPasien> RPs = new ArrayList<>();
         conn.connect();
             SimpleDateFormat DateFor = new SimpleDateFormat("yyyy-MM-dd");
             String stringDate= DateFor.format(tglKunjungan); 
-        String query = "SELECT * FROM Riwayat_Pasien WHERE Tgl_kunjungan = '" + stringDate + "'";
+        String query = "SELECT * FROM Riwayat_Pasien WHERE Tgl_kunjungan = '" + stringDate + "'"
+                + " AND NIK = '" + NIK + "'";
         System.out.println(stringDate);
         try {
             Statement stmt = conn.con.createStatement();
