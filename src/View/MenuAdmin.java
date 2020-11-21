@@ -53,10 +53,9 @@ public class MenuAdmin implements ActionListener{
         isi.add(input_obat);
         input_obat.addActionListener(this);
         
-        restock_obat.setBounds(350,170,200,50);
+        restock_obat.setBounds(350,140,200,50);
         isi.add(restock_obat);
         restock_obat.addActionListener(this);
-        
         frame.add(isi);
         frame.add(menu);
         frame.setVisible(true);

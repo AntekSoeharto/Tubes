@@ -5,6 +5,7 @@
  */
 package View;
 
+import Model.Singleton;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,12 +26,17 @@ public class MenuPasien implements ActionListener{
     JButton menu_pasien = new JButton("PASIEN");
     JButton menu_dokter = new JButton("DOKTER");
     JButton menu_admin = new JButton("ADMINISTRASI");
-    JButton insertPasienBaru = new JButton("Insert Pasien Baru");
-    JButton searchPasien = new JButton("cari Pasien");
-    JButton beliObat = new JButton("beli obat");
-    JButton tambahRiwayatPasien = new JButton("update riwayat pasien");
+    JButton insertPasienBaru,searchPasien,beliObat,tambahRiwayatPasien,buatJanjiTemu
+            ,lihatRiwayatPasien;
     
     public MenuPasien(){
+
+        insertPasienBaru = new JButton("Insert Pasien Baru");
+        searchPasien = new JButton("cari Pasien");
+        beliObat = new JButton("beli obat");
+        tambahRiwayatPasien = new JButton("update riwayat pasien");
+        buatJanjiTemu = new JButton("Janji Temu");
+        lihatRiwayatPasien = new JButton("lihat riwayat pasien");
         
         frame.setSize(1200, 700);
         frame.setLocationRelativeTo(null);
@@ -46,12 +52,15 @@ public class MenuPasien implements ActionListener{
         menu_admin.setBounds(35,320,120,50);
         insertPasienBaru.setBounds(265, 10, 150, 25);
         searchPasien.setBounds(265, 50, 130, 25);
-        beliObat.setBounds(265, 90, 150, 25);
-        tambahRiwayatPasien.setBounds(265, 130, 160, 25);
+        tambahRiwayatPasien.setBounds(265, 90, 160, 25);
+        buatJanjiTemu.setBounds(265, 130, 120, 25);
+        lihatRiwayatPasien.setBounds(265, 170, 130, 25);
+        
         isi.add(insertPasienBaru);
         isi.add(searchPasien);
-        isi.add(beliObat);
         isi.add(tambahRiwayatPasien);
+        isi.add(lihatRiwayatPasien);
+        isi.add(buatJanjiTemu);
         menu.add(menu_dokter);
         menu.add(menu_pasien);
         menu.add(menu_admin);
@@ -64,32 +73,14 @@ public class MenuPasien implements ActionListener{
         frame.add(menu);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        insertPasienBaru.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new ViewInsertPasienBaru();
-            }
-        });
-        searchPasien.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new ViewSearchPasien();
-            }
-        });
-        beliObat.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new ViewBeliObat();
-            }
-        });
-        tambahRiwayatPasien.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new viewTambahRiwayatPasien();
-            }
-        });
+        insertPasienBaru.addActionListener(this);
+        searchPasien.addActionListener(this);
+        tambahRiwayatPasien.addActionListener(this);
+        buatJanjiTemu.addActionListener(this);
+        lihatRiwayatPasien.addActionListener(this);
     }
 
+    @Override
     public void actionPerformed(ActionEvent ae) {
         String command = ae.getActionCommand();
         switch(command) {
@@ -103,6 +94,25 @@ public class MenuPasien implements ActionListener{
                 break;
             case "ADMINISTRASI":
                 new MenuAdmin();
+                frame.setVisible(false);
+                break;
+            case "Insert Pasien Baru":
+                new ViewInsertPasienBaru();
+                break;
+            case "cari Pasien":
+                new ViewSearchPasien();
+                frame.setVisible(false);
+                break;
+            case "update riwayat pasien":
+                new viewTambahRiwayatPasien();
+                frame.setVisible(false);
+                break;
+            case "Janji Temu":
+                new ViewJanjiTemu();
+                frame.setVisible(false);
+                break;
+            case "lihat riwayat pasien":
+                new viewLihatRiwayat1Pasien();
                 frame.setVisible(false);
                 break;
             default: 

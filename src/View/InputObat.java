@@ -47,24 +47,9 @@ public class InputObat implements ActionListener{
     JLabel labNama = new JLabel("Nama");
     JLabel labBeli = new JLabel("Harga Beli");
     JLabel labJual = new JLabel("Harga Jual");
-    JLabel labStok = new JLabel("Stok");
-    JLabel labTglbeli = new JLabel("Tgl Beli");
-    JLabel labTglkadaluarsa = new JLabel("Tgl Jual");
-    JLabel labidobat = new JLabel("ID Obat");
-    JLabel labidmlo = new JLabel("ID MLO");
     JTextField textNama = new JTextField();
     JTextField textBeli = new JTextField();
-    JTextField textidobat = new JTextField();
-    JTextField textidmlo = new JTextField();
-    UtilDateModel model1 = new UtilDateModel();
-    UtilDateModel model2 = new UtilDateModel();
-    Properties p = new Properties();
     JTextField textJual = new JTextField();
-    JTextField textStok= new JTextField();
-    JDatePanelImpl datePanel1 = new JDatePanelImpl(model1, p);
-    JDatePanelImpl datePanel2 = new JDatePanelImpl(model2, p);
-    JDatePickerImpl tgl_beli = new JDatePickerImpl(datePanel1, new DateLabelFormatter());
-    JDatePickerImpl tgl_kadaluarsa = new JDatePickerImpl(datePanel2, new DateLabelFormatter());
     
     
     
@@ -94,17 +79,6 @@ public class InputObat implements ActionListener{
         menu_dokter.addActionListener(this);
         menu_pasien.addActionListener(this);
         menu_admin.addActionListener(this);
-        //akhir template
-        
-        //isi menu
-        labidobat.setBounds(50, 80, 80, 20);
-        isi.add(labidobat);
-        textidobat.setBounds(200, 80, 300, 20);
-        isi.add(textidobat);
-        labidmlo.setBounds(50, 120, 80, 20);
-        isi.add(labidmlo);
-        textidmlo.setBounds(200, 120, 300, 20);
-        isi.add(textidmlo);
         labNama.setBounds(50, 160, 80, 20);
         isi.add(labNama);
         textNama.setBounds(200, 160, 300, 20);
@@ -117,41 +91,15 @@ public class InputObat implements ActionListener{
         isi.add(labJual);
         textJual.setBounds(200, 240, 300, 20);
         isi.add(textJual);
-        labStok.setBounds(50, 280, 80, 20);
-        isi.add(labStok);
-        textStok.setBounds(200, 280, 300, 20);
-        isi.add(textStok);
-        
-        
-        p.put("text.today", "Today");
-        p.put("text.month", "Month");
-        p.put("text.year", "Year");
-        
-//        datePicker.setBounds(130, 130, 250, 30);
-//        labTgllahir.setBounds(50, 140, 80, 20);
-//        datePicker.setBounds(200, 140, 300, 30);
-//        isi.add(labTgllahir);
-//        isi.add(datePicker);
-        
-        labTglbeli.setBounds(50, 320, 80, 20);
-        isi.add(labTglbeli);
-        tgl_beli.setBounds(200, 320, 300, 30);
-        isi.add(tgl_beli);
-        labTglkadaluarsa.setBounds(50, 360, 80, 20);
-        isi.add(labTglkadaluarsa);
-        tgl_kadaluarsa.setBounds(200, 360, 300, 30);
-        isi.add(tgl_kadaluarsa);
-        
-        
         
         submit.setBounds(350,400,120,50);
         submit.addActionListener(this);
         isi.add(submit);
         
-        
         frame.add(isi);
         frame.add(menu);
         frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
     public void actionPerformed(ActionEvent ae) {
@@ -173,14 +121,11 @@ public class InputObat implements ActionListener{
                 int beli = Integer.parseInt(textBeli.getText());
                 int jual = Integer.parseInt(textJual.getText());
                 String strnama = textNama.getText();
-                int stok = Integer.parseInt(textStok.getText());
-                String strtglbeli = model1.getYear() + "-" + model1.getMonth() + "-" + model1.getDay();
-                String strtglkadal = model2.getYear() + "-" + model2.getMonth() + "-" + model2.getDay();
-                String stridobat = textidobat.getText();
-                String stridmlo = textidmlo.getText();
-                
-                Obat obat = new Obat(strnama, beli, stok, jual, strtglbeli, strtglkadal, stridobat, stridmlo);
-
+                Obat obat = new Obat();
+                obat.setIDObat(control.getLastIDObat());
+                obat.setNama(strnama);
+                obat.setHargaBeli(beli);
+                obat.setHargaJual(jual);
                 boolean input = control.addObat(obat);
                 if(input == true){
                     frame.setVisible(false);
