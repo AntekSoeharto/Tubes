@@ -134,6 +134,7 @@ public class viewTambahRiwayatPasien implements ActionListener{
         
         viewTambahRiwayat.setSize(1200, 700);
         viewTambahRiwayat.setLayout(null);
+        viewTambahRiwayat.setLocationRelativeTo(null);
         viewTambahRiwayat.setVisible(true);
         viewTambahRiwayat.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
