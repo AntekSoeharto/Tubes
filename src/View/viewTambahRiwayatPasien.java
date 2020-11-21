@@ -11,6 +11,7 @@ import Controller.ControllerRiwayatPasien;
 import Model.Obat;
 import Model.Pasien;
 import Model.RiwayatPasien;
+import Model.Singleton;
 import com.mysql.cj.util.StringUtils;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -38,7 +39,7 @@ import org.jdatepicker.impl.UtilDateModel;
  *
  * @author V for Vladimir
  */
-public class viewTambahRiwayatPasien {
+public class viewTambahRiwayatPasien implements ActionListener{
     JFrame viewTambahRiwayat = new JFrame("Tambah Riwayat Pasien");
     JLabel NIKLabel,namaLabel,penyakitLabel,tanggalKunjunganLabel,jumlahObatLabel,keluhanLabel;
     JLabel[] namaObatLabel;
@@ -136,9 +137,31 @@ public class viewTambahRiwayatPasien {
         viewTambahRiwayat.setVisible(true);
         viewTambahRiwayat.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        buttonNext.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        menu_dokter.addActionListener(this);
+        menu_pasien.addActionListener(this);
+        menu_admin.addActionListener(this);
+        buttonInsert.addActionListener(this);
+        buttonNext.addActionListener(this);
+        buttonPrev.addActionListener(this);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String command = e.getActionCommand();
+        switch(command) {
+            case "PASIEN": 
+                new MenuPasien();
+                viewTambahRiwayat.setVisible(false);
+                break;
+            case "DOKTER":
+                new MenuDokter();
+                viewTambahRiwayat.setVisible(false);
+                break;
+            case "ADMINISTRASI":
+                new MenuAdmin();
+                viewTambahRiwayat.setVisible(false);
+                break;
+            case "Next":
                 NIKLabel.setText("NIK " + NIKField.getText());
                 namaLabel.setText("Nama " + namaField.getText());
                 tanggalKunjunganLabel.setText("tgl kunjungan " + tglKunjungan.getModel().getValue());
@@ -178,37 +201,8 @@ public class viewTambahRiwayatPasien {
                 }
                 panelContent.validate();
                 panelContent.repaint();
-            }
-        });
-        buttonInsert.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Pasien p = new Pasien();
-                try {
-                    p = ControllerPasien.getPasien(NIKField.getText());
-                    RiwayatPasien RP = new RiwayatPasien();
-                    RP.setKeluhan(KeluhanTextField.getText());
-                    RP.setPenyakit(penyakitTextField.getText());
-                    List<String> namaObats = new ArrayList<>();
-                    ArrayList<Obat> obatPasien = new ArrayList<>();
-                    RP.setTanggalKunjungan((Date)tglKunjungan.getModel().getValue());
-                    for(int i = 0 ; i < namaObatFields.length ; i++){
-                        obatPasien.add(new ControllerObat().getObat(namaObatFields[i].getText()));
-                        ControllerObat.insertResepObatPasien(obatPasien.get(i).getIDObat(), p.getNIK());
-                    }
-                    RP.setResepObat(namaObats);
-                    ControllerRiwayatPasien.insertNewRiwayatPasien(RP,p.getNIK());
-                    JOptionPane.showMessageDialog(null, "riwayat ditambah");
-                } catch (Exception exc) {
-                    p = ControllerPasien.getPasien(NIKField.getText());
-                    System.out.println(p.getNama());
-                    JOptionPane.showMessageDialog(null, "Pasien tidak ditemukan!");
-                }
-            }
-        });
-        buttonPrev.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                break;
+            case "Prev":
                 NIKLabel.setText("NIK");
                 namaLabel.setText("Nama");
                 tanggalKunjunganLabel.setText("tgl kunjungan");
@@ -233,10 +227,32 @@ public class viewTambahRiwayatPasien {
                         panelContent.remove(namaObatLabel[i]);
                     }
                 }
-//                panelContent.validate();
-//                panelContent.repaint();
-                
-            }
-        });
+                break;
+            case "tambahkan riwayat":
+                Pasien p = new Pasien();
+                try {
+                    p = ControllerPasien.getPasien(NIKField.getText());
+                    RiwayatPasien RP = new RiwayatPasien();
+                    RP.setKeluhan(KeluhanTextField.getText());
+                    RP.setPenyakit(penyakitTextField.getText());
+                    List<String> namaObats = new ArrayList<>();
+                    ArrayList<Obat> obatPasien = new ArrayList<>();
+                    RP.setTanggalKunjungan((Date)tglKunjungan.getModel().getValue());
+                    for(int i = 0 ; i < namaObatFields.length ; i++){
+                        obatPasien.add(new ControllerObat().getObat(namaObatFields[i].getText()));
+                        ControllerObat.insertResepObatPasien(obatPasien.get(i).getIDObat(), p.getNIK());
+                    }
+                    RP.setResepObat(namaObats);
+                    ControllerRiwayatPasien.insertNewRiwayatPasien(RP,p.getNIK());
+                    JOptionPane.showMessageDialog(null, "riwayat ditambah");
+                } catch (Exception exc) {
+                    p = ControllerPasien.getPasien(NIKField.getText());
+                    System.out.println(p.getNama());
+                    JOptionPane.showMessageDialog(null, "Pasien tidak ditemukan!");
+                }
+                break;
+            default: 
+                break;
+        }
     }
 }
