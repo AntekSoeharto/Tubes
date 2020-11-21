@@ -33,7 +33,7 @@ import javax.swing.WindowConstants;
 public class ViewBeliObatPasien implements ActionListener{
     Transaksi t = new Transaksi();
     JFrame formBeliObat = new JFrame();
-    JLabel jumlahJenisObatLabel,totalHarga;
+    JLabel jumlahJenisObatLabel,totalHargaLabel;
     JLabel[] namaObatLabel,jumlahObatLabel;
     JTextField jumlahJenisObatField;
     JTextField[] namaObatFields,jumlahObatFields;
@@ -47,6 +47,7 @@ public class ViewBeliObatPasien implements ActionListener{
     public ViewBeliObatPasien(String NIK,double hargaKonsultasi){
         NIKInput = NIK;
         hargaKonsul = hargaKonsultasi;
+        totalHargaLabel = new JLabel();
         formBeliObat.setSize(1200, 700);
         jumlahJenisObatLabel = new JLabel("jumlah Jenis obat");
         jumlahJenisObatField = new JTextField();
@@ -71,6 +72,7 @@ public class ViewBeliObatPasien implements ActionListener{
         buttonLanjut.setBounds(265, 400, 150, 25);
         buttonPrev.setBounds(600, 500, 100, 25);
         buttonHitungTotalHarga.setBounds(740, 500, 150, 25);
+        totalHargaLabel.setBounds(700, 10, 200, 25);
         
         menu_pasien.setBounds(35,200,120,50);
         menu_dokter.setBounds(35,260,120,50);
@@ -81,6 +83,7 @@ public class ViewBeliObatPasien implements ActionListener{
         panelContent.add(buttonLanjut);
         panelContent.add(buttonHitungTotalHarga);
         panelContent.add(buttonPrev);
+        panelContent.add(totalHargaLabel);
         panelMenu.add(menu_pasien);
         panelMenu.add(menu_dokter);
         panelMenu.add(menu_admin);
@@ -88,6 +91,7 @@ public class ViewBeliObatPasien implements ActionListener{
         formBeliObat.add(panelMenu);
         formBeliObat.add(panelContent);
         formBeliObat.setLayout(null);
+        formBeliObat.setLocationRelativeTo(null);
         formBeliObat.setVisible(true);
         formBeliObat.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
@@ -155,7 +159,6 @@ public class ViewBeliObatPasien implements ActionListener{
                 panelContent.repaint();
                 break;
             case "hitung total harga":
-                new ViewSearchPasien();
                 int hargaKonsul = 15000;
                 int golonganPasien = 0;
                 if(ControllerPasien.getPasien(NIKInput).getBPJS() == GolonganPasien.BPJS){
@@ -182,6 +185,7 @@ public class ViewBeliObatPasien implements ActionListener{
                 t.setTanggakMasuk(hariIni);
                 t.setTotal(totalHarga + hargaKonsul);
                  ControllerTransaksi.insertNewTransaksi(t);
+                totalHargaLabel.setText("total harga : " + t.getTotal());
                 break;
             case "Kembali" :
                 jumlahJenisObatLabel.setVisible(true);
