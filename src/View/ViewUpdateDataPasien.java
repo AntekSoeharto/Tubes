@@ -120,6 +120,8 @@ public class ViewUpdateDataPasien implements ActionListener{
         viewUpdateData.setSize(1200, 700);
         viewUpdateData.setLayout(null);
         viewUpdateData.setVisible(true);
+        viewUpdateData.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        viewUpdateData.setLocationRelativeTo(null);
         menu_dokter.addActionListener(this);
         menu_pasien.addActionListener(this);
         menu_admin.addActionListener(this);
