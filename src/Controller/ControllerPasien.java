@@ -80,7 +80,7 @@ public class ControllerPasien {
     // INSERT
     public static boolean insertNewPasien(Pasien pasien) {
         conn.connect();
-        String query = "INSERT INTO Pasien VALUES(?,?,?,?,?)";
+        String query = "INSERT INTO Pasien VALUES(?,?,?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement stmt = conn.con.prepareStatement(query);
             stmt.setString(1, pasien.getNIK());
