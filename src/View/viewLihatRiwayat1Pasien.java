@@ -116,7 +116,8 @@ public class viewLihatRiwayat1Pasien implements ActionListener{
                 break;
             case "lihat Riwayat":
                 String[] column = {"tgl kunjungan","keluhan","penyakit","resep obat"};
-                ArrayList<RiwayatPasien> RP = ControllerRiwayatPasien.getAllRiwayatPasiensByDate((Date)tglKunjungan.getModel().getValue());
+                ArrayList<RiwayatPasien> RP = ControllerRiwayatPasien.getAllRiwayatPasiensByDate((Date)tglKunjungan.getModel().getValue(),
+                        NIKInputField.getText());
                 ArrayList<String> resepObat = ControllerRiwayatPasien.getResepObat1Pasien(NIKInputField.getText());
                 StringBuffer sb = new StringBuffer();
                 String data[][] = new String[RP.size()][4];
