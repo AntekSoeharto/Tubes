@@ -10,6 +10,8 @@ package Model;
  * @author hp
  */
 public class Obat {
+    private String IDObat;
+    private String IDMasaLakuObat;
     private String Nama;
     private int hargaBeli;
     private int Stok;
@@ -35,23 +37,32 @@ public class Obat {
         this.idMlo = idMlo;
     }
 
-    public String getIdObat() {
-        return idObat;
-    }
-
-    public void setIdObat(String idObat) {
-        this.idObat = idObat;
-    }
-
-    public String getIdMlo() {
-        return idMlo;
-    }
-
-    public void setIdMlo(String idMlo) {
-        this.idMlo = idMlo;
+    public Obat(String IDObat, String IDMasaLakuObat, String Nama, int hargaBeli, int Stok, int hargaJual, String tgl_beli, String tgl_kadaluarsa) {
+        this.IDObat = IDObat;
+        this.IDMasaLakuObat = IDMasaLakuObat;
+        this.Nama = Nama;
+        this.hargaBeli = hargaBeli;
+        this.Stok = Stok;
+        this.hargaJual = hargaJual;
+        this.tgl_beli = tgl_beli;
+        this.tgl_kadaluarsa = tgl_kadaluarsa;
     }
     
-    
+    public String getIDObat() {
+        return IDObat;
+    }
+
+    public void setIDObat(String IDObat) {
+        this.IDObat = IDObat;
+    }
+
+    public String getIDMasaLakuObat() {
+        return IDMasaLakuObat;
+    }
+
+    public void setIDMasaLakuObat(String IDMasaLakuObat) {
+        this.IDMasaLakuObat = IDMasaLakuObat;
+    }
 
     public String getTgl_beli() {
         return tgl_beli;
@@ -68,10 +79,6 @@ public class Obat {
     public void setTgl_kadaluarsa(String tgl_kadaluarsa) {
         this.tgl_kadaluarsa = tgl_kadaluarsa;
     }
-
-    
-    
-
     public String getNama() {
         return Nama;
     }

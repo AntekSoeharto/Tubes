@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -36,6 +37,7 @@ public class ControllerRiwayatPasien {
                 RP.setPenyakit(rs.getString("Penyakit"));
                 RP.setTanggalKunjungan((Date) rs.getObject("Tgl_kunjungan"));
                 RP.setKeluhan(rs.getString("Keluhan"));
+                RP.setResepObat(getResepObatPasien());
                 RPs.add(RP);
             }
         } catch (SQLException e) {
@@ -43,7 +45,28 @@ public class ControllerRiwayatPasien {
         }
         return (RPs);
     }
-
+    public static ArrayList<RiwayatPasien> getAllRiwayatPasiensByDate(Date tglKunjungan) {
+        ArrayList<RiwayatPasien> RPs = new ArrayList<>();
+        conn.connect();
+            SimpleDateFormat DateFor = new SimpleDateFormat("yyyy-MM-dd");
+            String stringDate= DateFor.format(tglKunjungan); 
+        String query = "SELECT * FROM Riwayat_Pasien WHERE Tgl_kunjungan = '" + stringDate + "'";
+        System.out.println(stringDate);
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                RiwayatPasien RP = new RiwayatPasien();
+                RP.setPenyakit(rs.getString("Penyakit"));
+                RP.setTanggalKunjungan((Date) rs.getObject("Tgl_kunjungan"));
+                RP.setKeluhan(rs.getString("Keluhan"));
+                RPs.add(RP);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (RPs);
+    }
     // SELECT WHERE
     public static RiwayatPasien getRiwayatPasien(String NIK) {
         conn.connect();
@@ -65,14 +88,16 @@ public class ControllerRiwayatPasien {
     }
     
     // INSERT
-    public static boolean insertNewRiwayatPasien(RiwayatPasien RP) {
+    public static boolean insertNewRiwayatPasien(RiwayatPasien RP,String NIK) {
         conn.connect();
         String query = "INSERT INTO Riwayat_Pasien VALUES(?,?,?,?,?)";
         try {
             PreparedStatement stmt = conn.con.prepareStatement(query);
-            stmt.setString(1, RP.getPenyakit());
-            stmt.setString(2, RP.getKeluhan());
+            stmt.setInt(1, getLastIDFromRiwayatPasien(NIK));
+            stmt.setString(2, RP.getPenyakit());
             stmt.setObject(3, RP.getTanggalKunjungan());
+            stmt.setString(4, RP.getKeluhan());
+            stmt.setString(5, NIK);
             stmt.executeUpdate();
             return (true);
         } catch (SQLException e) {
@@ -112,25 +137,74 @@ public class ControllerRiwayatPasien {
             return (false);
         }
     }
+    public static int getLastIDFromRiwayatPasien(String NIK){
+        int ID = 0;
+        conn.connect();
+        String query = "SELECT ID_Riwayat FROM riwayat_pasien ORDER BY ID_Riwayat DESC LIMIT 1";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                ID = rs.getInt("ID_Riwayat");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (ID + 1);
+    }
     public static ArrayList<String> getResepObatPasien(){
         ArrayList<String> resepObat = new ArrayList<>();
         conn.connect();
-        String query = "SELECT a.Nama_obat,d.Nama "
-                + "FROM obat a,Resep_Obat_Pasien b,riwayat_pasien c,pasien d "
+        String query = "SELECT a.Nama_obat "
+                + "FROM obat a,Resep_Obat_Pasien b,riwayat_pasien c "
                 + "WHERE a.ID_Obat = b.ID_Obat "
-                + "AND b.NIK = c.NIK "
-                + "AND c.NIK = d.NIK;";
+                + "AND b.NIK = c.NIK ";
         try {
             Statement stmt = conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 String RO = new String();
-                RO = rs.getString("Penyakit");
+                RO = rs.getString("Nama_obat");
                 resepObat.add(RO);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return resepObat;
+    }
+    public static ArrayList<String> getResepObat1Pasien(String NIK){
+        ArrayList<String> resepObat = new ArrayList<>();
+        conn.connect();
+        String query = "SELECT a.Nama_obat "
+                + "FROM obat a,Resep_Obat_Pasien b,riwayat_pasien c,pasien d "
+                + "WHERE a.ID_Obat = b.ID_Obat "
+                + "AND b.NIK = c.NIK "
+                + "AND c.NIK = d.NIK "
+                + "AND d.NIK = " + NIK;
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                String RO = new String();
+                RO = rs.getString("Nama_obat");
+                resepObat.add(RO);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resepObat;
+    }
+    //paramnya id obat sama NIK pasien
+    public static boolean insertNewResepObat(String NIK,String IdObat){
+        conn.connect();
+        String query = "INSERT INTO Riwayat_Pasien VALUES(?,?)";
+        try {
+            PreparedStatement stmt = conn.con.prepareStatement(query);
+            stmt.executeUpdate();
+            return (true);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return (false);
+        }
     }
 }
