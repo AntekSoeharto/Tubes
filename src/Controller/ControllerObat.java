@@ -64,7 +64,7 @@ public class ControllerObat {
     public static ArrayList<Obat> getAllObat(String id_cabang){
         conn.connect();
         ArrayList<Obat> obats = new ArrayList<Obat>();
-        String query = "SELECT * FROM masa_obat_pasien WHERE ID_cabang = '" + id_cabang + "' ";
+        String query = "SELECT * FROM Masa_laku_obat WHERE ID_cabang = '" + id_cabang + "' ";
         try {
             Statement stmt = conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
