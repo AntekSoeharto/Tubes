@@ -87,7 +87,6 @@ public class MenuPasien implements ActionListener{
             case "PASIEN": 
                 new MenuPasien();
                 frame.setVisible(false);
-                System.out.println(Singleton.getInstance().getCabang());
                 break;
             case "DOKTER":
                 new MenuDokter();
@@ -99,7 +98,6 @@ public class MenuPasien implements ActionListener{
                 break;
             case "Insert Pasien Baru":
                 new ViewInsertPasienBaru();
-                frame.setVisible(false);
                 break;
             case "cari Pasien":
                 new ViewSearchPasien();
