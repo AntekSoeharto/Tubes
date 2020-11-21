@@ -79,17 +79,6 @@ public class InputObat implements ActionListener{
         menu_dokter.addActionListener(this);
         menu_pasien.addActionListener(this);
         menu_admin.addActionListener(this);
-        //akhir template
-        
-        //isi menu
-        labidobat.setBounds(50, 80, 80, 20);
-        isi.add(labidobat);
-        textidobat.setBounds(200, 80, 300, 20);
-        isi.add(textidobat);
-        labidmlo.setBounds(50, 120, 80, 20);
-        isi.add(labidmlo);
-        textidmlo.setBounds(200, 120, 300, 20);
-        isi.add(textidmlo);
         labNama.setBounds(50, 160, 80, 20);
         isi.add(labNama);
         textNama.setBounds(200, 160, 300, 20);

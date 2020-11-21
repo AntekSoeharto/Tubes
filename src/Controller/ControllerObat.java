@@ -61,7 +61,7 @@ public class ControllerObat {
             return (false);
         }        
     }
-    public static ArrayList<Obat> getAllObat(){
+    public static ArrayList<Obat> getAllObat(String id_cabang){
         conn.connect();
         ArrayList<Obat> obats = new ArrayList<Obat>();
         String query = "SELECT * FROM masa_obat_pasien WHERE ID_cabang = '" + id_cabang + "' ";
@@ -70,8 +70,8 @@ public class ControllerObat {
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 Obat obat = new Obat();
-                obat.setIdMlo(rs.getString("ID_MLO"));
-                obat.setIdObat(rs.getString("ID_obat"));
+                obat.setIDMasaLakuObat(rs.getString("ID_MLO"));
+                obat.setIDObat(rs.getString("ID_obat"));
                 obat.setStok(Integer.parseInt(rs.getString("Stok")));
                 obat.setTgl_beli(rs.getString("Tgl_beli"));
                 obat.setTgl_kadaluarsa(rs.getString("Tgl_kadaluarsa"));
