@@ -6,6 +6,8 @@
 package View;
 
 import Controller.ControllerDokter;
+import Model.Dokter;
+import Model.Transaksi;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,7 +29,7 @@ public class ViewJanjiTemu implements ActionListener{
     JLabel NIKLabel,poliLabel,dokterLabel,hargaLabel;
     JTextField NIKField;
     JComboBox<Object>dokterField,poliField;
-    JButton buttonNext,buttonBuatJanji;
+    JButton buttonNext,buttonBuatJanji,buttonBack;
     JPanel panelContent,panelMenu;
     JButton menu_pasien = new JButton("PASIEN");
     JButton menu_dokter = new JButton("DOKTER");
@@ -37,27 +39,29 @@ public class ViewJanjiTemu implements ActionListener{
         poliLabel = new JLabel("poli");
         dokterLabel = new JLabel("nama dokter");
         hargaLabel = new JLabel("harga");
-        String[] poli = {"gigi","THT","gizi"};
-        poliField = new JComboBox<>(poli);//isi dari database?
-        ControllerDokter CD = new ControllerDokter();
-//        ArrayList<Dokter> DAL = CD.getAllDokters();
-//        String[] namaDokters = new String[DAL.size()];
-//        for (int i = 0; i < DAL.size(); i++) {
-//            namaDokters[i] = new String();
-//            namaDokters[i] = DAL.get(i).getNama();
-//        }
-        dokterField = new JComboBox<>();//kalo udh ad getAllDokters masukkin namaDokters ke sini
+        String[] poli = {"Dokter Umum","Dokter THT","Dokter Spesialis Anak"};
+        poliField = new JComboBox<>(poli);
+        dokterField = new JComboBox<>();
         NIKField = new JTextField();
         buttonBuatJanji = new JButton("Done");
+        buttonNext = new JButton("next");
+        buttonBack = new JButton("back");
         panelContent = new JPanel();
         panelMenu = new JPanel();
+        buttonBuatJanji.setVisible(false);
+        buttonBack.setVisible(false);
+        dokterLabel.setVisible(false);
+        dokterField.setVisible(false);
         
         NIKLabel.setBounds(245, 10, 160, 25);
         poliLabel.setBounds(245, 50, 160, 25);
         dokterLabel.setBounds(245, 90, 160, 25);
+        dokterField.setBounds(325, 90, 160, 25);
         NIKField.setBounds(325, 10, 160, 25);
         poliField.setBounds(325, 50, 160, 25);
-        dokterField.setBounds(325, 90, 160, 25);
+        buttonBack.setBounds(690, 500, 100, 25);
+        buttonNext.setBounds(800, 500, 100, 25);
+        buttonBuatJanji.setBounds(800, 500, 100, 25);
         
         panelMenu.setBounds(10,10,200,640);
         panelContent.setBounds(230,10,930,640);
@@ -79,6 +83,9 @@ public class ViewJanjiTemu implements ActionListener{
         panelContent.add(poliField);
         panelContent.add(dokterLabel);
         panelContent.add(dokterField);
+        panelContent.add(buttonNext);
+        panelContent.add(buttonBack);
+        panelContent.add(buttonBuatJanji);
         
         panelMenu.add(menu_admin);
         panelMenu.add(menu_dokter);
@@ -86,7 +93,9 @@ public class ViewJanjiTemu implements ActionListener{
         menu_dokter.addActionListener(this);
         menu_pasien.addActionListener(this);
         menu_admin.addActionListener(this);
-        
+        buttonNext.addActionListener(this);
+        buttonBack.addActionListener(this);
+        buttonBuatJanji.addActionListener(this);
         janjiTemu.add(panelContent);
         janjiTemu.add(panelMenu);
         janjiTemu.setSize(1200, 700);
@@ -97,6 +106,8 @@ public class ViewJanjiTemu implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
+        ControllerDokter CD = new ControllerDokter();
+        ArrayList<Dokter> DAL = CD.getAllDokter();
         switch(command) {
             case "PASIEN": 
                 new MenuPasien();
@@ -108,6 +119,40 @@ public class ViewJanjiTemu implements ActionListener{
                 break;
             case "ADMINISTRASI":
                 new MenuAdmin();
+                janjiTemu.setVisible(false);
+                break;
+            case "next":
+                for (int i = 0; i < DAL.size(); i++) {
+                    if(DAL.get(i).getPoliklinik().equals(poliField.getSelectedItem())){
+                        dokterField.addItem(DAL.get(i).getNama());
+                    }
+                }
+                dokterLabel.setVisible(true);
+                dokterField.setVisible(true);
+                buttonBack.setVisible(true);
+                buttonBuatJanji.setVisible(true);
+                poliField.setVisible(false);
+                NIKField.setVisible(false);
+                buttonNext.setVisible(false);
+                poliLabel.setText("poliklinik : " + poliField.getSelectedItem());
+                NIKLabel.setText("NIK : " + NIKField.getText());
+                break;
+            case "back":
+                dokterField.removeAllItems();
+                dokterLabel.setVisible(false);
+                dokterField.setVisible(false);
+                buttonBack.setVisible(false);
+                buttonBuatJanji.setVisible(false);
+                poliField.setVisible(true);
+                NIKField.setVisible(true);
+                buttonNext.setVisible(true);
+                poliLabel.setText("poliklinik");
+                NIKLabel.setText("NIK");
+                break;
+            case "Done":
+                double hargaKonsul = 15000;
+                hargaLabel.setText("harga = " + hargaKonsul);
+                new ViewBeliObatPasien(NIKField.getText(),hargaKonsul);
                 janjiTemu.setVisible(false);
                 break;
             default: 
