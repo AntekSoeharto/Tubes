@@ -61,7 +61,7 @@ public class Rujukan implements ActionListener{
         text += "\tNama\t: " + pasien.getNama() + "\n";
         text += "\tTelepon\t: " + pasien.getTelepon() + "\n";
         text += "\t Dengan ini kami menyatakan bahwa tanggung jawab pasien ini ada di tangan Rumah Sakit " + rs;
-        text += ".\nAtas Kerjasamanya Terimakasih\n\n\n";
+        text += ".\nAtas Kerjasamanya Terimakasih\n\n\n\n\n\n\n";
         text += "\t\t\t\t\t\tStaff Puskesmas\n\n\n";
         text += "\t\t\t\t\t\t" + Singleton.getInstance().getStaff().getUsername();
         rujuks = new JTextArea(text);
@@ -69,7 +69,7 @@ public class Rujukan implements ActionListener{
         rujuks.setFont(rujuks.getFont().deriveFont(15f));
         System.out.println(text);
         isi.add(rujuks);
-        
+        String bpjs = String.valueOf(pasien.getBPJS());
         
         
         frame.add(isi);
