@@ -39,18 +39,20 @@ public class ControllerStaff {
     public static Cabang getCabang(String id){
         conn.connect();
         Cabang cabang = new Cabang();
-        String query = "SELECT * FROM cabang WHERE ID_cabang='" + id + "'";
+        String query = "SELECT * FROM cabang WHERE ID_cabang = '" + id + "'";
         try {
             Statement stmt = conn.con.createStatement();
+            System.out.println(id);
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 cabang.setAlamat(rs.getString("Alamat"));
                 cabang.setTelepon(rs.getString("No_telepon"));
                 cabang.setNama(rs.getString("Nama_cabang"));
             }
+            return(cabang);
         } catch (SQLException e) {
             e.printStackTrace();
+            return(null);
         }
-        return (null);
     }
 }
