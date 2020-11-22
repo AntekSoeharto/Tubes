@@ -238,7 +238,7 @@ public class ViewInsertPasienBaru implements InterfaceGolongan{
                 pt.setListRiwayatPasien(new ArrayList<>());
                 
                 pt.pasienBaru(pt);
-                
+                viewInsertNewPatient.dispose();
             }
         });
     }
