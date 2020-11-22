@@ -48,7 +48,7 @@ public class ControllerRiwayatPasien {
     public static ArrayList<RiwayatPasien> getAllRiwayatPasiens(String NIK) {
         ArrayList<RiwayatPasien> RPs = new ArrayList<>();
         conn.connect();
-        String query = "SELECT * FROM Riwayat_Pasien WHERE Tgl_kunjungan NIK = '" + NIK + "'";
+        String query = "SELECT * FROM Riwayat_Pasien WHERE NIK = '" + NIK + "'";
         try {
             Statement stmt = conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
