@@ -246,6 +246,8 @@ public class viewTambahRiwayatPasien implements ActionListener{
                     RP.setResepObat(namaObats);
                     ControllerRiwayatPasien.insertNewRiwayatPasien(RP,p.getNIK());
                     JOptionPane.showMessageDialog(null, "riwayat ditambah");
+                    viewTambahRiwayat.dispose();
+                    new MenuPasien();
                 } catch (Exception exc) {
                     p = ControllerPasien.getPasien(NIKField.getText());
                     System.out.println(p.getNama());
