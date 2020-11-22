@@ -45,23 +45,13 @@ public class viewLihatRiwayat1Pasien implements ActionListener{
     public viewLihatRiwayat1Pasien() {
         namaLabel = new JLabel("Nama : ");
         NIKInputLabel = new JLabel("NIK");
-        tglKunjunganInput = new JLabel("tgl kunjungan");
         NIKInputField = new JTextField();
         panelMenu = new JPanel();
         panelContent = new JPanel();
-        UtilDateModel model = new UtilDateModel();
-        Properties p = new Properties();
-        p.put("text.today", "Today");
-        p.put("text.month", "Month");
-        p.put("text.year", "Year");
-        datePanel = new JDatePanelImpl(model, p);
-        tglKunjungan = new JDatePickerImpl(datePanel,new Model.DateLabelFormatter());
         lihatRiwayat = new JButton("lihat Riwayat");
         
         NIKInputLabel.setBounds(10,10,120,25);
-        tglKunjunganInput.setBounds(10,35,130,25);
         NIKInputField.setBounds(140,10,120,25);
-        tglKunjungan.setBounds(160,35,120,25);
         lihatRiwayat.setBounds(800, 500, 130, 25);
         
         menu_pasien.setBounds(35,200,120,50);
@@ -69,9 +59,7 @@ public class viewLihatRiwayat1Pasien implements ActionListener{
         menu_admin.setBounds(35,320,120,50);
         
         panelContent.add(NIKInputLabel);
-        panelContent.add(tglKunjunganInput);
         panelContent.add(NIKInputField);
-        panelContent.add(tglKunjungan);
         panelContent.add(lihatRiwayat);
         
         panelMenu.add(menu_dokter);
@@ -116,8 +104,7 @@ public class viewLihatRiwayat1Pasien implements ActionListener{
                 break;
             case "lihat Riwayat":
                 String[] column = {"tgl kunjungan","keluhan","penyakit","resep obat"};
-                ArrayList<RiwayatPasien> RP = ControllerRiwayatPasien.getAllRiwayatPasiensByDate((Date)tglKunjungan.getModel().getValue(),
-                        NIKInputField.getText());
+                ArrayList<RiwayatPasien> RP = ControllerRiwayatPasien.getAllRiwayatPasiens(NIKInputField.getText());
                 ArrayList<String> resepObat = ControllerRiwayatPasien.getResepObat1Pasien(NIKInputField.getText());
                 StringBuffer sb = new StringBuffer();
                 String data[][] = new String[RP.size()][4];
