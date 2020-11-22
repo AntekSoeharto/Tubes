@@ -31,6 +31,8 @@ public class MainMenu implements ActionListener{
     JButton menu_pasien = new JButton("PASIEN");
     JButton menu_dokter = new JButton("DOKTER");
     JButton menu_admin = new JButton("ADMINISTRASI");
+    JLabel home1;
+    JLabel home2;
     
     
     public MainMenu(){
@@ -53,6 +55,17 @@ public class MainMenu implements ActionListener{
         menu_dokter.addActionListener(this);
         menu_pasien.addActionListener(this);
         menu_admin.addActionListener(this);
+        String homes1 = "SELAMAT DATANG DI PROGRAM PUSKESMAS";
+        String homes2 = "Cabang : " + Singleton.getInstance().getCabang().getNama();
+        home1 = new JLabel(homes1);
+        home2 = new JLabel(homes2);
+        home1.setFont(new Font("Courier New", Font.PLAIN, 18));
+        home2.setFont(new Font("Courier New", Font.PLAIN, 15));
+        home1.setBounds(100, 100, 500, 100);
+        home2.setBounds(100, 210, 500, 100);
+        isi.add(home1);
+        isi.add(home2);
+        
         
         
         frame.add(isi);
