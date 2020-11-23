@@ -42,7 +42,7 @@ public class PreRujukan implements ActionListener{
     JButton menu_dokter = new JButton("DOKTER");
     JButton menu_admin = new JButton("ADMINISTRASI");
     JButton submit = new JButton("SUBMIT");
-    String[] listrs = {"Rumah Sakit Boromeus", "Rumah Santosa Pasir Kaliki", "Rumah Sakit Santosa Kopo", "Rumah Sakit Immanuel"};
+    String[] listrs = {"Boromeus", "Santosa Pasir Kaliki", "Santosa Kopo", "Immanuel"};
     JComboBox rs = new JComboBox(listrs);
     
     private ControllerPasien control = new ControllerPasien();
@@ -73,9 +73,14 @@ public class PreRujukan implements ActionListener{
         labNid.setBounds(290, 230, 100, 20);
         textNid.setBounds(400, 230, 200, 20);
         
+        namars.setBounds(290, 260, 100, 20);
+        rs.setBounds(400, 260, 200, 20);
+        
         submit.addActionListener(this);
         submit.setBounds(350, 350, 150, 50);
         
+        isi.add(namars);
+        isi.add(rs);
         isi.add(labNid);
         isi.add(textNid);
         isi.add(submit);
