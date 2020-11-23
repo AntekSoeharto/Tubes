@@ -168,6 +168,8 @@ public class ViewUpdateDataPasien implements ActionListener{
                 }
                 try {
                     cp.updatePasien(golongan, alamat, telepon, NIKSearch);
+                    viewUpdateData.dispose();
+                    new MenuPasien();
                     JOptionPane.showMessageDialog(null, "data berhasil diubah");
                 } catch (Exception exc) {
                     JOptionPane.showMessageDialog(null, "data gagal diubah");
