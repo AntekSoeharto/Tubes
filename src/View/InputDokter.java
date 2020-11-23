@@ -198,7 +198,7 @@ public class InputDokter implements ActionListener{
                 break;
             case "SUBMIT":
                 String strnik = textNik.getText();
-                String strnama = textNik.getText();
+                String strnama = textNama.getText();
                 String strlahir = model.getDay() + "-" + model.getMonth() + "-" + model.getYear();
                 String strgoldar = "";
                 if (gola.isSelected()) {

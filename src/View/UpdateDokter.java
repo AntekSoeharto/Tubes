@@ -202,7 +202,7 @@ public class UpdateDokter implements ActionListener{
                 break;
             case "SUBMIT":
                 String strnik = textNik.getText();
-                String strnama = textNik.getText();
+                String strnama = textNama.getText();
                 String strlahir = model.getYear() + "-" + model.getMonth() + "-" + model.getDay();
                 String strgoldar = "";
                 if (gola.isSelected()) {
